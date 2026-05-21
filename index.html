@@ -1,0 +1,1974 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portal Salud+ — Material Design 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<style>
+/* ============================================================
+   MD3 TOKEN SYSTEM — Paleta Salud+
+   60% Primario: Azul profundo  |  20% Neutro  |  20% Verde esmeralda
+   ============================================================ */
+:root {
+  --md-primary:          #0A3D5F;
+  --md-primary-container:#D6E8F5;
+  --md-on-primary:       #FFFFFF;
+  --md-on-primary-cont:  #001E2E;
+  --md-secondary:        #2563A8;
+  --md-secondary-cont:   #D8E8FA;
+  --md-on-secondary:     #FFFFFF;
+  --md-on-secondary-cont:#001F3A;
+  --md-tertiary:         #006B4E;
+  --md-tertiary-cont:    #C8F0E1;
+  --md-on-tertiary:      #FFFFFF;
+  --md-on-tertiary-cont: #002118;
+  --md-error:            #BA1A1A;
+  --md-error-cont:       #FFDAD6;
+  --md-on-error:         #FFFFFF;
+  --md-on-error-cont:    #410002;
+  --md-surface:          #F8FAFB;
+  --md-surface-variant:  #EDF2F7;
+  --md-surface-cont:     #FFFFFF;
+  --md-surface-cont-low: #F0F4F8;
+  --md-surface-cont-high:#E2EAF1;
+  --md-on-surface:       #0D1B24;
+  --md-on-surface-var:   #1E3A4A; /* WCAG AA — valor único corregido */
+  --md-outline:          #4A6878;
+  --md-outline-var:      #9DB8C8;
+  --md-background:       #EEF4F8;
+  /* Von Restorff: colores urgencia/alerta diferenciados */
+  --urgent-bg:           #FFF0F0;
+  --urgent-border:       #C0392B;
+  --urgent-text:         #7B1010;
+  --warn-bg:             #FFF8E6;
+  --warn-border:         #C47900;
+  --warn-text:           #5C3A00;
+  --elev-1: 0 1px 2px rgba(0,0,0,.08),0 1px 3px 1px rgba(0,0,0,.06);
+  --elev-2: 0 1px 2px rgba(0,0,0,.10),0 2px 6px 2px rgba(0,0,0,.08);
+  --elev-3: 0 4px 8px 3px rgba(0,0,0,.10),0 1px 3px rgba(0,0,0,.10);
+  --shape-xs:4px;--shape-sm:8px;--shape-md:12px;
+  --shape-lg:16px;--shape-xl:28px;--shape-full:100px;
+  --font:'Noto Sans',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font);background:var(--md-background);color:var(--md-on-surface);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.vista{display:none}.vista.active{display:block}
+.screen{max-width:960px;margin:16px auto 24px;background:var(--md-surface-cont);box-shadow:var(--elev-3);border-radius:var(--shape-lg);overflow:hidden}
+
+/* ── TOP BAR ── */
+.top-bar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:64px;background:var(--md-primary)}
+.brand{display:flex;align-items:center;gap:8px;cursor:pointer;text-decoration:none}
+.brand-icon{width:36px;height:36px;background:var(--md-tertiary);border-radius:var(--shape-sm);display:flex;align-items:center;justify-content:center}
+.brand-icon svg{width:20px;height:20px}
+.brand-name{font-size:20px;font-weight:700;color:var(--md-on-primary);letter-spacing:.5px}
+.brand-name span{color:var(--md-tertiary-cont)}
+.top-nav{display:flex;gap:4px}
+.nav-item{color:rgba(255,255,255,.75);text-decoration:none;font-size:14px;font-weight:500;padding:8px 14px;border-radius:var(--shape-full);transition:all .2s;cursor:pointer;border:none;background:transparent;font-family:var(--font)}
+.nav-item:hover{background:rgba(255,255,255,.10);color:#fff}.nav-item.active{background:rgba(255,255,255,.18);color:#fff;font-weight:600}
+.bar-actions{display:flex;align-items:center;gap:8px}
+.user-chip{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border-radius:var(--shape-full);padding:4px 12px 4px 4px}
+.user-avatar{width:32px;height:32px;border-radius:50%;background:var(--md-tertiary-cont);color:var(--md-on-tertiary-cont);font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.user-name{font-size:14px;font-weight:600;color:#fff}
+.btn-text-inv{color:rgba(255,255,255,.85);background:transparent;border:none;font-size:14px;font-weight:500;padding:8px 12px;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s}
+.btn-text-inv:hover{background:rgba(255,255,255,.10);color:#fff}
+
+/* ── BUTTONS ── */
+.btn-filled{background:var(--md-primary);color:var(--md-on-primary);border:none;padding:14px 28px;font-size:16px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--elev-1)}
+.btn-filled:hover{background:#0D4A72;box-shadow:var(--elev-2)}.btn-filled:active{transform:scale(.98)}
+.btn-filled-green{background:var(--md-tertiary);color:var(--md-on-tertiary);border:none;padding:14px 28px;font-size:16px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;gap:8px;box-shadow:var(--elev-1)}
+.btn-filled-green:hover{background:#008660;box-shadow:var(--elev-2)}
+.btn-outlined{background:transparent;color:var(--md-primary);border:1.5px solid var(--md-outline);padding:13px 27px;font-size:16px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.btn-outlined:hover{background:rgba(10,61,95,.06);border-color:var(--md-primary)}
+.btn-tonal{background:var(--md-primary-container);color:var(--md-on-primary-cont);border:none;padding:12px 22px;font-size:14px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-tonal:hover{filter:brightness(.94)}
+.btn-nav{background:var(--md-surface-variant);color:var(--md-on-surface-var);border:1px solid var(--md-outline-var);padding:8px 18px;font-size:14px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+.btn-nav:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+
+/* ── FORM ── */
+.field-wrap{display:flex;flex-direction:column;gap:6px;margin-bottom:20px}
+.field-label{font-size:12px;font-weight:600;color:var(--md-primary);text-transform:uppercase;letter-spacing:.8px}
+.field-supporting{font-size:12px;color:#1E3A4A;margin-top:4px}
+.md-input{width:100%;padding:16px 18px;font-size:16px;border:1.5px solid var(--md-outline);border-radius:var(--shape-sm);background:var(--md-surface-cont);color:var(--md-on-surface);font-family:var(--font);transition:all .2s;min-height:56px}
+.md-input::placeholder{color:var(--md-on-surface-var);opacity:.6}
+.md-input:focus{outline:none;border-color:var(--md-primary);border-width:2px;box-shadow:0 0 0 3px var(--md-primary-container)}
+.md-textarea{resize:vertical;min-height:100px;padding:14px 18px;font-size:15px;border:1.5px solid var(--md-outline);border-radius:var(--shape-sm);background:var(--md-surface-cont);color:var(--md-on-surface);font-family:var(--font);transition:all .2s;width:100%}
+.md-textarea:focus{outline:none;border-color:var(--md-primary);border-width:2px;box-shadow:0 0 0 3px var(--md-primary-container)}
+
+/* ── BANNERS ── */
+.snack-success{display:none;background:var(--md-tertiary);color:var(--md-on-tertiary);border-radius:var(--shape-md);padding:16px 20px;margin-bottom:20px;align-items:flex-start;gap:14px;animation:slideDown .35s ease}
+.snack-success.show{display:flex}
+.snack-icon{width:24px;height:24px;flex-shrink:0;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.snack-title{font-size:16px;font-weight:600;display:block;margin-bottom:4px}
+.snack-msg{font-size:14px;opacity:.9;display:block}
+.snack-chips{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.snack-chips .chip{background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.25);font-size:12px}
+.snack-info{display:none;background:var(--md-primary);color:var(--md-on-primary);border-radius:var(--shape-md);padding:14px 20px;margin-bottom:20px;align-items:center;gap:12px;font-size:15px;font-weight:500}
+.snack-info.show{display:flex}
+.banner-ctx{background:var(--md-primary-container);color:var(--md-on-primary-cont);border-radius:var(--shape-md);padding:14px 18px;font-size:15px;display:flex;align-items:flex-start;gap:12px;margin-bottom:20px;border-left:4px solid var(--md-primary)}
+.banner-error{display:none;background:var(--md-error-cont);color:var(--md-on-error-cont);border-radius:var(--shape-md);padding:16px 18px;margin-bottom:20px;border-left:4px solid var(--md-error)}
+.banner-error.show{display:block}
+.banner-error strong{font-size:15px;display:block;margin-bottom:8px;font-weight:600}
+.banner-error p{font-size:14px;line-height:1.7}
+.banner-error a{color:var(--md-error);font-weight:600;text-decoration:underline;cursor:pointer}
+.caps-warn{display:none;background:#FFF3CD;color:#5C4A00;border-radius:var(--shape-xs);padding:8px 14px;font-size:13px;font-weight:600;margin-top:6px;align-items:center;gap:8px}
+.caps-warn.show{display:flex}
+
+/* ── CHIP ── */
+.chip{display:inline-flex;align-items:center;gap:6px;background:var(--md-surface-variant);color:var(--md-on-surface-var);border:1px solid var(--md-outline-var);padding:6px 14px;border-radius:var(--shape-full);font-size:13px;font-weight:500;font-family:var(--font)}
+.chip-green{background:var(--md-tertiary-cont);color:var(--md-on-tertiary-cont);border-color:transparent}
+.chip-blue{background:var(--md-primary-container);color:var(--md-on-primary-cont);border-color:transparent}
+
+/* ── STEPPER ── */
+.md-stepper{display:flex;align-items:center;background:var(--md-surface-variant);border-radius:var(--shape-lg);padding:6px;margin-bottom:24px;gap:2px}
+.md-step{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:10px 8px;border-radius:var(--shape-md);font-size:14px;font-weight:500;cursor:pointer;transition:all .2s;color:var(--md-on-surface-var)}
+.step-dot{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;background:var(--md-outline-var);color:var(--md-on-surface-var)}
+.md-step.active{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.md-step.active .step-dot{background:var(--md-primary);color:#fff}
+.md-step.done{color:var(--md-tertiary)}.md-step.done .step-dot{background:var(--md-tertiary);color:#fff}
+.md-step.upcoming{opacity:.55}
+
+/* ── LAYOUT HELPERS ── */
+.nav-row{display:flex;justify-content:space-between;align-items:center;padding:16px 28px;border-bottom:1px solid var(--md-outline-var);margin-bottom:28px}
+.divider{height:1px;background:var(--md-outline-var);margin:20px 0}
+.page-wrap{padding:0 28px 40px}
+.page-hero{padding:40px 36px;background:var(--md-primary);color:#fff;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.04)}
+.page-hero::after{content:'';position:absolute;bottom:-30px;right:60px;width:130px;height:130px;border-radius:50%;background:rgba(0,107,78,.12)}
+.page-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:var(--md-tertiary-cont);font-size:12px;font-weight:600;padding:4px 12px;border-radius:var(--shape-full);margin-bottom:14px;letter-spacing:.3px}
+.page-hero h1{font-size:30px;font-weight:700;line-height:1.2;letter-spacing:-.4px;margin-bottom:10px;position:relative;z-index:1}
+.page-hero h1 em{font-style:normal;color:var(--md-tertiary-cont)}
+.page-hero p{font-size:16px;color:rgba(255,255,255,.8);max-width:520px;line-height:1.6;position:relative;z-index:1}
+.section-title{font-size:20px;font-weight:700;color:var(--md-on-surface);margin-bottom:6px}
+.section-sub{font-size:14px;color:var(--md-on-surface-var);margin-bottom:20px}
+
+/* ── FOOTER ── */
+.app-footer{background:var(--md-primary);color:rgba(255,255,255,.8);padding:20px 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer-brand{font-size:18px;font-weight:700;color:#fff;cursor:pointer;display:flex;align-items:center;gap:8px}
+.footer-brand span{color:var(--md-tertiary-cont)}
+.footer-info{text-align:right}
+.footer-info p{font-size:14px;font-weight:600;color:#fff}
+.footer-info small{font-size:12px;color:rgba(255,255,255,.6)}
+
+/* ── FLOATS ── */
+.floats{position:fixed;bottom:24px;display:flex;flex-direction:column;gap:8px;z-index:300}
+.floats-left{left:16px}.floats-right{right:16px;align-items:flex-end}
+.fab{width:52px;height:52px;border-radius:var(--shape-lg);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:var(--elev-3);transition:all .2s;font-family:var(--font)}
+.fab-surface{background:var(--md-surface-cont);color:var(--md-on-surface)}.fab-wa{background:#25D366;color:#fff}.fab-wa:hover{background:#1da050}
+.fab-label{font-size:11px;color:var(--md-on-surface-var);background:var(--md-surface-cont);border:1px solid var(--md-outline-var);padding:3px 8px;border-radius:var(--shape-xs);text-align:center;font-weight:600;font-family:var(--font);box-shadow:var(--elev-1)}
+
+/* ── MODAL ── */
+.modal-overlay{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.55);z-index:500;align-items:center;justify-content:center;padding:16px}
+.modal-overlay.open{display:flex}
+.modal-dialog{background:var(--md-surface-cont);width:100%;max-width:560px;max-height:90vh;overflow-y:auto;border-radius:var(--shape-xl);padding:32px 32px 28px;position:relative;box-shadow:var(--elev-3)}
+.modal-close-btn{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:none;background:var(--md-surface-variant);color:var(--md-on-surface-var);cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center;transition:all .2s}
+.modal-close-btn:hover{background:rgba(10,61,95,.08)}
+.modal-dialog h2{font-size:22px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.modal-dialog p.sub{font-size:14px;color:var(--md-on-surface-var);margin-bottom:20px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.modal-divider{height:1px;background:var(--md-outline-var);margin:16px 0}
+.modal-toast{display:none;background:var(--md-tertiary);color:var(--md-on-tertiary);border-radius:var(--shape-md);padding:16px 20px;margin-bottom:16px;align-items:flex-start;gap:14px;animation:slideDown .35s ease;font-size:15px;font-weight:600}
+.modal-toast.show{display:flex}
+
+/* ── VISTA 1 ── */
+.hero-section{padding:48px 36px 40px;background:var(--md-primary);color:#fff;position:relative;overflow:hidden}
+.hero-section::before{content:'';position:absolute;top:-60px;right:-60px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
+.hero-section::after{content:'';position:absolute;bottom:-40px;right:80px;width:160px;height:160px;border-radius:50%;background:rgba(0,107,78,.12)}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:var(--md-tertiary-cont);font-size:13px;font-weight:600;padding:5px 14px;border-radius:var(--shape-full);margin-bottom:20px;letter-spacing:.3px}
+.hero-section h1{font-size:36px;font-weight:700;line-height:1.2;letter-spacing:-.5px;max-width:560px;margin-bottom:16px}
+.hero-section h1 em{font-style:normal;color:var(--md-tertiary-cont)}
+.hero-section>p{font-size:18px;color:rgba(255,255,255,.8);max-width:500px;line-height:1.6;margin-bottom:32px}
+.hero-cta{display:flex;gap:12px;flex-wrap:wrap;position:relative;z-index:1}
+.hero-cta .btn-filled-green{padding:16px 32px;font-size:17px}
+.hero-cta .btn-outlined{color:#fff;border-color:rgba(255,255,255,.4);padding:15px 31px;font-size:17px}.hero-cta .btn-outlined:hover{background:rgba(255,255,255,.1);border-color:#fff}
+.onboarding-strip{background:var(--md-surface-cont-low);border-top:1px solid var(--md-outline-var);padding:36px 36px 32px}
+.onboarding-strip h2{font-size:20px;font-weight:700;color:var(--md-on-surface);margin-bottom:24px;text-align:center}
+.ob-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.ob-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:24px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;transition:all .2s;box-shadow:var(--elev-1)}
+.ob-card:hover{box-shadow:var(--elev-2);transform:translateY(-2px)}
+.ob-num{width:40px;height:40px;border-radius:50%;background:var(--md-primary-container);color:var(--md-on-primary-cont);font-size:17px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.ob-icon{font-size:26px}
+.ob-card h3{font-size:15px;font-weight:700;color:var(--md-on-surface)}.ob-card p{font-size:13px;color:var(--md-on-surface-var);line-height:1.5}
+.cta-strip{padding:32px 36px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;border-top:1px solid var(--md-outline-var)}
+
+/* ── VISTA 2 ── */
+.login-wrap{padding:0 28px 40px;max-width:560px;margin:0 auto}
+.login-wrap h1{font-size:28px;font-weight:700;color:var(--md-on-surface);margin-bottom:16px}
+.step-group{margin-bottom:20px}
+.step-head{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.step-badge{width:32px;height:32px;border-radius:50%;background:var(--md-primary);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-head label{font-size:16px;font-weight:700;color:var(--md-on-surface)}
+.recovery-section{margin-top:28px;padding-top:20px;border-top:1px solid var(--md-outline-var);display:flex;flex-direction:column;gap:12px}
+.recovery-section p{font-size:13px;color:var(--md-on-surface-var)}
+.recovery-section a{font-size:15px;color:var(--md-primary);font-weight:600;text-decoration:none;cursor:pointer}
+.recovery-section a:hover{text-decoration:underline}
+
+/* ── VISTA 3 ── */
+.dash-wrap{padding:0 28px 36px}
+.welcome-card{background:var(--md-primary-container);border-radius:var(--shape-lg);padding:20px 24px;margin-bottom:24px;display:flex;align-items:center;gap:16px;border:1px solid rgba(10,61,95,.15)}
+.welcome-card .wc-icon{width:48px;height:48px;background:var(--md-primary);border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.welcome-card h2{font-size:18px;font-weight:700;color:var(--md-on-primary-cont)}
+.welcome-card p{font-size:14px;color:var(--md-on-primary-cont);opacity:.75;margin-top:2px}
+.voice-card{background:var(--md-surface-variant);border-radius:var(--shape-md);border-left:4px solid var(--md-secondary);padding:14px 18px;font-size:15px;color:var(--md-on-surface);margin-bottom:24px;display:flex;align-items:flex-start;gap:12px}
+.section-header{margin-bottom:16px}
+.section-header h2{font-size:20px;font-weight:700;color:var(--md-on-surface)}
+.section-header p{font-size:14px;color:var(--md-on-surface-var);margin-top:2px}
+.tools-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.tool-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;text-align:center;transition:all .2s;min-height:120px;justify-content:center;box-shadow:var(--elev-1)}
+.tool-card:hover{background:var(--md-primary-container);border-color:var(--md-primary);box-shadow:var(--elev-2);transform:translateY(-2px)}
+.tool-card:hover .tool-name{color:var(--md-on-primary-cont)}
+.tool-icon-wrap{width:48px;height:48px;background:var(--md-surface-variant);border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:24px;transition:all .2s}
+.tool-card:hover .tool-icon-wrap{background:var(--md-primary)}
+.tool-name{font-size:13px;font-weight:700;color:var(--md-on-surface);line-height:1.3}
+.quick-section{padding-top:20px}
+.quick-section h3{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:12px}
+.quick-btns{display:flex;gap:10px;flex-wrap:wrap}
+.quick-btn{background:var(--md-surface-cont-high);border:1px solid var(--md-outline-var);padding:12px 20px;font-size:14px;font-weight:600;cursor:pointer;border-radius:var(--shape-full);display:flex;align-items:center;gap:8px;transition:all .2s;font-family:var(--font);color:var(--md-on-surface-var)}
+.quick-btn:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont);border-color:var(--md-primary)}
+
+/* ── VISTA 4 ── */
+.cita-wrap{padding:0 28px 36px}
+.accordion-card{border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);overflow:hidden;margin-bottom:24px;box-shadow:var(--elev-1)}
+.accordion-hdr{background:var(--md-primary);color:#fff;padding:14px 20px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:all .2s}
+.accordion-hdr:hover{background:#0D4A72}
+.accordion-body{padding:20px;display:none;background:var(--md-surface-cont)}.accordion-body.open{display:block}
+.tut-step{display:flex;align-items:flex-start;gap:12px;margin-bottom:14px}
+.tut-num{width:28px;height:28px;background:var(--md-tertiary);color:#fff;border-radius:50%;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.tut-text{font-size:15px;color:var(--md-on-surface);line-height:1.5}
+.select-btn{width:100%;background:var(--md-surface-cont);border:1.5px solid var(--md-outline);border-radius:var(--shape-sm);padding:16px 20px;font-size:16px;font-weight:500;cursor:pointer;text-align:left;display:flex;align-items:center;justify-content:space-between;transition:all .2s;font-family:var(--font);color:var(--md-on-surface);min-height:56px}
+.select-btn:hover{border-color:var(--md-primary);background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.select-menu{border:1.5px solid var(--md-outline);border-top:none;border-radius:0 0 var(--shape-sm) var(--shape-sm);display:none;overflow:hidden;background:var(--md-surface-cont);box-shadow:var(--elev-2)}.select-menu.open{display:block}
+.select-item{padding:14px 20px;font-size:15px;cursor:pointer;border-bottom:1px solid var(--md-outline-var);transition:all .18s;color:var(--md-on-surface);font-family:var(--font);display:flex;align-items:center;gap:10px}
+.select-item:last-child{border-bottom:none}.select-item:hover{background:var(--md-surface-variant)}
+.select-item.sel{background:var(--md-primary-container);color:var(--md-on-primary-cont);font-weight:600}
+.horarios-sec{display:none;margin-top:24px}.horarios-sec.open{display:block}
+.btn-map{background:var(--md-surface-variant);color:var(--md-on-surface-var);border:1px solid var(--md-outline-var);padding:8px 12px;font-size:13px;font-weight:600;cursor:pointer;border-radius:var(--shape-full);display:inline-flex;align-items:center;gap:6px;font-family:var(--font);transition:all .2s}
+.btn-map:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.confirm-sec{display:none;margin-top:16px;margin-bottom:24px}.confirm-sec.open{display:block}
+.btn-confirm{width:100%;background:var(--md-tertiary);color:var(--md-on-tertiary);border:none;padding:18px;font-size:18px;font-weight:700;cursor:pointer;border-radius:var(--shape-full);font-family:var(--font);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:var(--elev-1)}
+.btn-confirm:hover{background:#008660;box-shadow:var(--elev-2)}
+.confirm-note{font-size:13px;color:var(--md-on-surface-var);text-align:center;margin-top:10px}
+
+/* ── VISTA 5 — ACERCA DE ── */
+.timeline{position:relative;padding-left:28px}
+.timeline::before{content:'';position:absolute;left:10px;top:6px;bottom:6px;width:2px;background:var(--md-outline-var)}
+.tl-item{position:relative;margin-bottom:28px}
+.tl-dot{position:absolute;left:-24px;top:4px;width:14px;height:14px;border-radius:50%;background:var(--md-primary);border:3px solid var(--md-primary-container);flex-shrink:0}
+.tl-year{font-size:12px;font-weight:700;color:var(--md-tertiary);letter-spacing:.5px;margin-bottom:4px}
+.tl-title{font-size:15px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.tl-desc{font-size:14px;color:var(--md-on-surface-var);line-height:1.6}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+.stat-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px 16px;text-align:center;box-shadow:var(--elev-1)}
+.stat-num{font-size:28px;font-weight:700;color:var(--md-primary);display:block;line-height:1}
+.stat-label{font-size:12px;color:var(--md-on-surface-var);margin-top:6px;font-weight:500;line-height:1.4}
+.value-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px;display:flex;gap:14px;box-shadow:var(--elev-1);transition:all .2s}
+.value-card:hover{box-shadow:var(--elev-2);border-color:var(--md-primary)}
+.value-icon{width:44px;height:44px;border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.value-icon.blue{background:var(--md-primary-container)}
+.value-icon.green{background:var(--md-tertiary-cont)}
+.value-text h3{font-size:15px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.value-text p{font-size:13px;color:var(--md-on-surface-var);line-height:1.5}
+.team-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.team-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);overflow:hidden;box-shadow:var(--elev-1);transition:all .2s}
+.team-card:hover{box-shadow:var(--elev-2);transform:translateY(-2px)}
+.team-avatar{height:80px;display:flex;align-items:center;justify-content:center;font-size:32px}
+.team-av-blue{background:var(--md-primary-container)}
+.team-av-green{background:var(--md-tertiary-cont)}
+.team-av-sec{background:var(--md-secondary-cont)}
+.team-info{padding:16px}
+.team-info h3{font-size:15px;font-weight:700;color:var(--md-on-surface);margin-bottom:2px}
+.team-info p{font-size:12px;color:var(--md-on-surface-var)}
+.team-info .team-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.accordion-plain{border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);overflow:hidden;margin-bottom:10px}
+.accordion-plain-hdr{padding:14px 18px;font-size:15px;font-weight:600;cursor:pointer;display:flex;justify-content:space-between;align-items:center;color:var(--md-on-surface);transition:all .2s;background:var(--md-surface-cont)}
+.accordion-plain-hdr:hover{background:var(--md-surface-variant)}
+.accordion-plain-body{padding:14px 18px;display:none;font-size:14px;color:var(--md-on-surface-var);line-height:1.7;border-top:1px solid var(--md-outline-var);background:var(--md-surface-cont)}
+.accordion-plain-body.open{display:block}
+
+/* ── VISTA 6 — SERVICIOS ── */
+.serv-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:24px}
+.serv-tab{background:var(--md-surface-variant);color:var(--md-on-surface-var);border:1px solid var(--md-outline-var);padding:8px 18px;font-size:14px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s}
+.serv-tab:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.serv-tab.active{background:var(--md-primary);color:#fff;border-color:var(--md-primary)}
+.serv-panel{display:none}.serv-panel.active{display:block}
+.serv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:24px}
+.serv-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:22px 20px;box-shadow:var(--elev-1);transition:all .2s;cursor:pointer}
+.serv-card:hover{box-shadow:var(--elev-2);border-color:var(--md-primary);transform:translateY(-2px)}
+.serv-card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.serv-card-icon{width:44px;height:44px;border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:var(--md-primary-container)}
+.serv-card-icon.green{background:var(--md-tertiary-cont)}
+.serv-card h3{font-size:16px;font-weight:700;color:var(--md-on-surface)}
+.serv-card p{font-size:13px;color:var(--md-on-surface-var);line-height:1.6}
+.serv-card .serv-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.process-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.proc-step{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:18px 14px;text-align:center;position:relative;box-shadow:var(--elev-1)}
+.proc-step::after{content:'→';position:absolute;right:-8px;top:50%;transform:translateY(-50%);color:var(--md-outline);font-size:16px;z-index:1}
+.proc-step:last-child::after{display:none}
+.proc-num{width:32px;height:32px;border-radius:50%;background:var(--md-primary);color:#fff;font-size:14px;font-weight:700;display:flex;align-items:center;justify-content:center;margin:0 auto 8px}
+.proc-step h4{font-size:13px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.proc-step p{font-size:12px;color:var(--md-on-surface-var);line-height:1.4}
+.info-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.info-card{background:var(--md-surface-cont-low);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:18px}
+.info-card h4{font-size:14px;font-weight:700;color:var(--md-on-surface);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.info-card ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.info-card li{font-size:13px;color:var(--md-on-surface-var);padding-left:16px;position:relative}
+.info-card li::before{content:'·';position:absolute;left:4px;color:var(--md-tertiary);font-size:16px;line-height:1}
+.alert-banner{background:var(--md-tertiary-cont);color:var(--md-on-tertiary-cont);border-radius:var(--shape-md);padding:14px 18px;font-size:14px;display:flex;align-items:flex-start;gap:12px;border-left:4px solid var(--md-tertiary);margin-bottom:20px}
+
+/* ── VISTA 7 — CENTROS ── */
+.search-bar-wrap{margin-bottom:24px}
+.search-bar{width:100%;padding:16px 20px;font-size:16px;border:1.5px solid var(--md-outline);border-radius:var(--shape-full);background:var(--md-surface-cont);color:var(--md-on-surface);font-family:var(--font);transition:all .2s;padding-left:48px}
+.search-bar:focus{outline:none;border-color:var(--md-primary);border-width:2px;box-shadow:0 0 0 3px var(--md-primary-container)}
+.search-bar-wrap{position:relative}
+.search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--md-outline);pointer-events:none}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-chip{background:var(--md-surface-variant);color:var(--md-on-surface-var);border:1px solid var(--md-outline-var);padding:7px 16px;font-size:13px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s}
+.filter-chip:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.filter-chip.active{background:var(--md-primary);color:#fff;border-color:var(--md-primary)}
+.centro-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:22px 20px;box-shadow:var(--elev-1);margin-bottom:14px;transition:all .2s}
+.centro-card:hover{box-shadow:var(--elev-2);border-color:var(--md-outline)}
+.centro-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.centro-tipo{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:700;padding:3px 10px;border-radius:var(--shape-full);text-transform:uppercase;letter-spacing:.5px}
+.tipo-hospital{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.tipo-clinica{background:var(--md-tertiary-cont);color:var(--md-on-tertiary-cont)}
+.tipo-consultorio{background:var(--md-secondary-cont);color:var(--md-on-secondary-cont)}
+.tipo-urgencias{background:var(--md-error-cont);color:var(--md-on-error-cont)}
+.centro-name{font-size:17px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.centro-addr{font-size:14px;color:var(--md-on-surface-var)}
+.centro-details{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:12px 0;padding:12px;background:var(--md-surface-cont-low);border-radius:var(--shape-md)}
+.cd-item{display:flex;flex-direction:column;gap:2px}
+.cd-label{font-size:11px;font-weight:600;color:var(--md-on-surface-var);text-transform:uppercase;letter-spacing:.5px}
+.cd-value{font-size:13px;font-weight:600;color:var(--md-on-surface)}
+.centro-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.badge-open{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--md-tertiary);background:var(--md-tertiary-cont);padding:3px 10px;border-radius:var(--shape-full)}
+.badge-closed{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--md-on-error-cont);background:var(--md-error-cont);padding:3px 10px;border-radius:var(--shape-full)}
+.badge-24{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;color:var(--md-on-secondary-cont);background:var(--md-secondary-cont);padding:3px 10px;border-radius:var(--shape-full)}
+.map-placeholder{background:var(--md-primary-container);border-radius:var(--shape-lg);height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;margin-bottom:20px;cursor:pointer;border:1px solid var(--md-outline-var);transition:all .2s}
+.map-placeholder:hover{filter:brightness(.96)}
+.map-placeholder p{font-size:15px;font-weight:600;color:var(--md-on-primary-cont)}
+.map-placeholder small{font-size:13px;color:var(--md-on-primary-cont);opacity:.7}
+
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse-warn{0%,100%{box-shadow:0 0 0 0 rgba(196,121,0,.35)}50%{box-shadow:0 0 0 6px rgba(196,121,0,0)}}
+
+/* ── REFINAMIENTO: Touch targets — Ley de Fitts + auditoría ── */
+.recovery-section a{min-height:44px;display:inline-flex;align-items:center;padding:10px 16px;border-radius:var(--shape-md)}
+.filter-chip{min-height:40px;padding:8px 18px}
+.btn-map{min-height:40px;padding:8px 14px}
+.select-item{min-height:48px}
+
+/* ── REFINAMIENTO: stat-grid responsive (auditoría: 4 cols apretadas en móvil) ── */
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:28px}
+@media(max-width:600px){.stat-grid{grid-template-columns:1fr 1fr}.ob-grid{grid-template-columns:1fr}}
+
+/* ── REFINAMIENTO: Búsqueda predictiva de medicamentos (KLM: reduce M+K) ── */
+.med-search-wrap{position:relative;margin-bottom:20px}
+.med-search-input{width:100%;background:var(--md-surface-cont-low);border:1.5px solid var(--md-outline-var);border-radius:var(--shape-full);padding:12px 18px 12px 46px;font-size:15px;font-family:var(--font);color:var(--md-on-surface);outline:none;transition:border-color .2s}
+.med-search-input:focus{border-color:var(--md-primary);background:#fff}
+.med-search-icon{position:absolute;left:16px;top:50%;transform:translateY(-50%);color:var(--md-outline);pointer-events:none}
+.med-suggestions{position:absolute;top:calc(100% + 6px);left:0;right:0;background:#fff;border:1.5px solid var(--md-outline-var);border-radius:var(--shape-md);box-shadow:var(--elev-3);z-index:200;display:none;overflow:hidden}
+.med-suggestions.open{display:block;animation:slideDown .18s ease}
+.med-suggestion-item{padding:12px 18px;font-size:14px;cursor:pointer;display:flex;align-items:center;gap:10px;color:var(--md-on-surface);border-bottom:1px solid var(--md-surface-cont-high);transition:background .15s}
+.med-suggestion-item:last-child{border-bottom:none}
+.med-suggestion-item:hover{background:var(--md-primary-container)}
+.med-suggestion-item mark{background:none;color:var(--md-primary);font-weight:700}
+
+/* ── REFINAMIENTO: Especialidades recientes/rápidas (GOMS: reduce M) ── */
+.esp-recientes{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.esp-chip{display:inline-flex;align-items:center;gap:6px;background:var(--md-primary-container);color:var(--md-on-primary-cont);border:1.5px solid rgba(10,61,95,.18);border-radius:var(--shape-full);padding:8px 16px;font-size:13px;font-weight:600;cursor:pointer;transition:all .2s;min-height:40px}
+.esp-chip:hover{background:var(--md-primary);color:#fff;border-color:var(--md-primary)}
+.esp-chip svg{width:14px;height:14px;flex-shrink:0}
+
+/* ── REFINAMIENTO: Resumen sticky de cita (GOMS: datos persistentes) ── */
+.cita-sticky-summary{position:sticky;top:0;z-index:100;background:var(--md-primary);color:#fff;padding:10px 20px;display:none;align-items:center;gap:12px;font-size:13px;font-weight:600;border-bottom:2px solid var(--md-tertiary);animation:slideDown .2s ease}
+.cita-sticky-summary.visible{display:flex}
+.cita-sticky-summary svg{flex-shrink:0;opacity:.8}
+.cita-sticky-pill{background:rgba(255,255,255,.15);border-radius:var(--shape-full);padding:4px 12px;font-size:12px}
+
+/* ── REFINAMIENTO: CTA Sticky medicamento urgente (KLM: reduce P) ── */
+.med-cta-sticky{position:sticky;bottom:0;background:#fff;border-top:2px solid var(--warn-border);padding:14px 20px;display:none;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 -4px 16px rgba(0,0,0,.10);z-index:100;animation:slideDown .2s ease}
+.med-cta-sticky.visible{display:flex}
+.med-cta-sticky-text{font-size:13px;font-weight:600;color:var(--warn-text)}
+
+/* ── REFINAMIENTO: Animación de entrada de tarjetas (diseño gráfico) ── */
+.med-card{animation:fadeInUp .3s ease both}
+.med-card:nth-child(2){animation-delay:.06s}
+.med-card:nth-child(3){animation-delay:.12s}
+.hist-item{animation:fadeInUp .25s ease both}
+.hist-item:nth-child(2){animation-delay:.05s}
+.hist-item:nth-child(3){animation-delay:.10s}
+.auth-item{animation:fadeInUp .25s ease both}
+
+/* ── REFINAMIENTO: Pulso en tarjeta urgente (Von Restorff reforzado) ── */
+.med-card.por-renovar{animation:fadeInUp .3s ease both,pulse-warn 2.5s ease-in-out 1s 3}
+
+/* ── REFINAMIENTO: Lucide icons en botones ── */
+.btn-icon{display:inline-flex;align-items:center;gap:6px}
+.btn-icon svg{width:16px;height:16px;flex-shrink:0}
+
+/* ── REFINAMIENTO: Indicador de paso activo en stepper ── */
+.md-step.active .step-dot{background:var(--md-primary);color:#fff;transform:scale(1.15);transition:transform .2s}
+
+/* ── REFINAMIENTO: Buscador de historial ── */
+.hist-search-wrap{position:relative;margin-bottom:16px}
+.hist-search-input{width:100%;background:var(--md-surface-cont-low);border:1.5px solid var(--md-outline-var);border-radius:var(--shape-full);padding:11px 18px 11px 44px;font-size:14px;font-family:var(--font);color:var(--md-on-surface);outline:none;transition:border-color .2s}
+.hist-search-input:focus{border-color:var(--md-primary);background:#fff}
+.hist-search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--md-outline);pointer-events:none}
+
+/* ── GESTIÓN DE FOCO — Accesibilidad teclado ── */
+:focus-visible{outline:3px solid var(--md-primary);outline-offset:3px;border-radius:4px}
+button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline-offset:3px}
+.modal-overlay:focus-visible{outline:none}
+
+/* ── VON RESTORFF: Tarjetas urgentes diferenciadas ── */
+.med-card.urgente{border:2px solid var(--urgent-border);background:var(--urgent-bg);box-shadow:0 0 0 3px rgba(192,57,43,.12),var(--elev-1)}
+.med-card.urgente .med-card-head{position:relative}
+.med-card.por-renovar{border:2px solid var(--warn-border);background:var(--warn-bg);box-shadow:0 0 0 3px rgba(196,121,0,.12),var(--elev-1)}
+.auth-item.vencida-alerta{border:2px solid var(--urgent-border);background:var(--urgent-bg);box-shadow:0 0 0 3px rgba(192,57,43,.12),var(--elev-1)}
+.auth-item.vencida-alerta .auth-item-head::before{content:'⚠ VENCIDA — Requiere atención';display:block;width:100%;background:var(--urgent-border);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:var(--shape-xs);margin-bottom:10px;letter-spacing:.5px;text-align:center}
+.urgencia-banner{display:flex;align-items:flex-start;gap:10px;background:var(--urgent-bg);border:1.5px solid var(--urgent-border);border-radius:var(--shape-md);padding:12px 16px;margin-bottom:12px;color:var(--urgent-text);font-size:13px;font-weight:600}
+
+/* ── ESTADO RENOVACIÓN PERMANENTE ── */
+.btn-renovado{background:var(--md-tertiary)!important;color:#fff!important;cursor:default!important;opacity:1!important}
+.btn-renovado:hover{background:var(--md-tertiary)!important;box-shadow:var(--elev-1)!important}
+.renovacion-enviada-badge{display:inline-flex;align-items:center;gap:6px;background:var(--md-tertiary-cont);color:var(--md-on-tertiary-cont);border:1.5px solid var(--md-tertiary);border-radius:var(--shape-full);padding:6px 14px;font-size:13px;font-weight:700;margin-top:8px}
+
+/* ── ÍCONO AYUDA LOGIN (Ley de Jakob) ── */
+.help-hint{display:inline-flex;align-items:center;gap:6px;background:var(--md-primary-container);color:var(--md-on-primary-cont);border-radius:var(--shape-md);padding:10px 14px;font-size:13px;font-weight:600;margin-bottom:20px;border-left:3px solid var(--md-primary)}
+
+/* ── VISTAS DASHBOARD (v8-v12) ── */
+.dash-page-wrap{padding:0 28px 40px}
+.dash-hero{padding:28px 28px 24px;background:var(--md-primary);color:#fff;position:relative;overflow:hidden}
+.dash-hero::before{content:'';position:absolute;top:-50px;right:-50px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.04)}
+.dash-hero-eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.12);color:var(--md-tertiary-cont);font-size:12px;font-weight:600;padding:4px 12px;border-radius:var(--shape-full);margin-bottom:12px;letter-spacing:.3px}
+.dash-hero h1{font-size:26px;font-weight:700;line-height:1.2;margin-bottom:6px;position:relative;z-index:1}
+.dash-hero h1 em{font-style:normal;color:var(--md-tertiary-cont)}
+.dash-hero p{font-size:15px;color:rgba(255,255,255,.8);line-height:1.5;position:relative;z-index:1}
+
+/* Medicamentos */
+.med-status-bar{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.med-stat{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:18px 16px;text-align:center;box-shadow:var(--elev-1)}
+.med-stat-num{font-size:26px;font-weight:700;display:block;line-height:1;margin-bottom:4px}
+.med-stat-num.blue{color:var(--md-primary)}.med-stat-num.green{color:var(--md-tertiary)}.med-stat-num.warn{color:#C47900}
+.med-stat-lbl{font-size:12px;color:var(--md-on-surface-var);font-weight:500}
+.med-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px;box-shadow:var(--elev-1);margin-bottom:12px;transition:all .2s}
+.med-card:hover{box-shadow:var(--elev-2)}
+.med-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.med-icon{width:44px;height:44px;border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.med-icon.blue{background:var(--md-primary-container)}.med-icon.green{background:var(--md-tertiary-cont)}.med-icon.warn{background:#FFF3CC}
+.med-name{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:2px}
+.med-generic{font-size:13px;color:var(--md-on-surface-var)}
+.badge-activo{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--md-on-tertiary-cont);background:var(--md-tertiary-cont);padding:3px 10px;border-radius:var(--shape-full)}
+.badge-renovar{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#5C4A00;background:#FFF3CC;padding:3px 10px;border-radius:var(--shape-full)}
+.badge-pendiente{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--md-on-primary-cont);background:var(--md-primary-container);padding:3px 10px;border-radius:var(--shape-full)}
+.med-details{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px;background:var(--md-surface-cont-low);border-radius:var(--shape-md);margin-bottom:12px}
+.med-detail-item{display:flex;flex-direction:column;gap:2px}
+.med-detail-lbl{font-size:11px;font-weight:600;color:var(--md-on-surface-var);text-transform:uppercase;letter-spacing:.4px}
+.med-detail-val{font-size:13px;font-weight:600;color:var(--md-on-surface)}
+.progreso-wrap{margin-bottom:12px}
+.progreso-lbl{display:flex;justify-content:space-between;font-size:12px;color:var(--md-on-surface-var);margin-bottom:6px;font-weight:500}
+.progreso-bar{height:8px;background:var(--md-outline-var);border-radius:var(--shape-full);overflow:hidden}
+.progreso-fill{height:100%;border-radius:var(--shape-full);transition:width .6s ease}
+.fill-green{background:var(--md-tertiary)}.fill-warn{background:#F0A500}.fill-blue{background:var(--md-primary)}
+
+/* Historial */
+.hist-filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.hist-item{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px;box-shadow:var(--elev-1);margin-bottom:12px;cursor:pointer;transition:all .2s}
+.hist-item:hover{box-shadow:var(--elev-2);border-color:var(--md-primary)}
+.hist-item-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:10px}
+.hist-fecha{font-size:12px;font-weight:700;color:var(--md-tertiary);letter-spacing:.3px}
+.hist-especialidad{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:2px}
+.hist-medico{font-size:13px;color:var(--md-on-surface-var)}
+.hist-diagnostico{background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px 14px;margin-top:10px;font-size:14px;color:var(--md-on-surface);border-left:3px solid var(--md-primary)}
+.hist-diagnostico strong{display:block;font-size:12px;color:var(--md-primary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-weight:700}
+.hist-expand-body{display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--md-outline-var)}
+.hist-expand-body.open{display:block}
+.hist-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+
+/* Autorizaciones */
+.auth-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.auth-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:18px 16px;text-align:center;box-shadow:var(--elev-1)}
+.auth-num{font-size:26px;font-weight:700;display:block;line-height:1;margin-bottom:4px}
+.auth-num.green{color:var(--md-tertiary)}.auth-num.warn{color:#C47900}.auth-num.blue{color:var(--md-primary)}
+.auth-lbl{font-size:12px;color:var(--md-on-surface-var);font-weight:500}
+.auth-item{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px;box-shadow:var(--elev-1);margin-bottom:12px;transition:all .2s}
+.auth-item:hover{box-shadow:var(--elev-2)}
+.auth-item-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:12px}
+.auth-icon-wrap{width:44px;height:44px;border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:var(--md-primary-container)}
+.auth-icon-wrap.green{background:var(--md-tertiary-cont)}.auth-icon-wrap.warn{background:#FFF3CC}
+.auth-title{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:2px}
+.auth-sub{font-size:13px;color:var(--md-on-surface-var)}
+.badge-aprobado{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--md-on-tertiary-cont);background:var(--md-tertiary-cont);padding:3px 10px;border-radius:var(--shape-full)}
+.badge-revision{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#5C4A00;background:#FFF3CC;padding:3px 10px;border-radius:var(--shape-full)}
+.badge-vencida{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:700;color:var(--md-on-error-cont);background:var(--md-error-cont);padding:3px 10px;border-radius:var(--shape-full)}
+.auth-meta{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;padding:12px;background:var(--md-surface-cont-low);border-radius:var(--shape-md);margin-bottom:12px}
+
+/* Resultados */
+.res-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.res-tab{background:var(--md-surface-variant);color:var(--md-on-surface-var);border:1px solid var(--md-outline-var);padding:7px 16px;font-size:13px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s}
+.res-tab:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.res-tab.active{background:var(--md-primary);color:#fff;border-color:var(--md-primary)}
+.res-panel{display:none}.res-panel.active{display:block}
+.res-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px;box-shadow:var(--elev-1);margin-bottom:12px;transition:all .2s}
+.res-card:hover{box-shadow:var(--elev-2)}
+.res-card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:14px}
+.res-icon-wrap{width:44px;height:44px;border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;background:var(--md-primary-container)}
+.res-icon-wrap.green{background:var(--md-tertiary-cont)}
+.res-title{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:2px}
+.res-date{font-size:13px;color:var(--md-on-surface-var)}
+.res-table{width:100%;border-collapse:collapse;margin-bottom:12px}
+.res-table th{font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;letter-spacing:.5px;padding:8px 12px;background:var(--md-surface-cont-low);text-align:left;border-bottom:1px solid var(--md-outline-var)}
+.res-table td{font-size:13px;padding:10px 12px;border-bottom:1px solid var(--md-outline-var);color:var(--md-on-surface);vertical-align:middle}
+.res-table tr:last-child td{border-bottom:none}
+.res-val-normal{color:var(--md-tertiary);font-weight:700}.res-val-alto{color:var(--md-error);font-weight:700}.res-val-bajo{color:#C47900;font-weight:700}
+.badge-normal{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--md-on-tertiary-cont);background:var(--md-tertiary-cont);padding:2px 8px;border-radius:var(--shape-full)}
+.badge-alto{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:var(--md-on-error-cont);background:var(--md-error-cont);padding:2px 8px;border-radius:var(--shape-full)}
+.badge-bajo{display:inline-flex;align-items:center;gap:4px;font-size:10px;font-weight:700;color:#5C4A00;background:#FFF3CC;padding:2px 8px;border-radius:var(--shape-full)}
+
+/* Ayuda */
+.help-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:28px}
+.help-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:22px 20px;box-shadow:var(--elev-1);cursor:pointer;transition:all .2s;text-decoration:none;display:block}
+.help-card:hover{box-shadow:var(--elev-2);border-color:var(--md-primary);transform:translateY(-2px)}
+.help-card-icon{width:48px;height:48px;border-radius:var(--shape-md);display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:12px;background:var(--md-primary-container)}
+.help-card-icon.green{background:var(--md-tertiary-cont)}
+.help-card h3{font-size:15px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.help-card p{font-size:13px;color:var(--md-on-surface-var);line-height:1.5}
+.contact-strip{background:var(--md-primary-container);border-radius:var(--shape-lg);padding:22px 24px;margin-bottom:24px;border:1px solid rgba(10,61,95,.12)}
+.contact-strip h3{font-size:16px;font-weight:700;color:var(--md-on-primary-cont);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.contact-row{display:flex;gap:10px;flex-wrap:wrap}
+.contact-btn{display:inline-flex;align-items:center;gap:8px;background:var(--md-primary);color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;text-decoration:none}
+.contact-btn:hover{background:#0D4A72}.contact-btn.green{background:var(--md-tertiary)}.contact-btn.green:hover{background:#008660}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════ VISTA 1 — LANDING ═══════════════════════ -->
+<div class="vista active" id="v1">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)" role="link" aria-label="Salud+ — Ir a página de inicio">
+      <div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+      <span class="brand-name">SALUD<span>+</span></span>
+    </div>
+    <nav class="top-nav" aria-label="Navegación principal">
+      <a class="nav-item active" onclick="showVista(1)" aria-label="Ir a Inicio" role="button">Inicio</a>
+      <a class="nav-item" onclick="showVista(5)" aria-label="Ir a Acerca de" role="button">Acerca de</a>
+      <a class="nav-item" onclick="showVista(6)" aria-label="Ir a Servicios" role="button">Servicios</a>
+      <a class="nav-item" onclick="showVista(7)" aria-label="Ir a Centros de salud" role="button">Centros</a>
+    </nav>
+    <div class="bar-actions"><button class="btn-text-inv" onclick="showVista(2)" aria-label="Iniciar sesión en el portal">Iniciar sesión →</button></div>
+  </header>
+  <div class="hero-section">
+    <div class="hero-eyebrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Portal de salud seguro · MSPS Colombia</div>
+    <h1>Tu salud no espera,<br>y ahora <em>tampoco tú.</em></h1>
+    <p>Sin filas ni vueltas. Pide tu cita, revisa tus exámenes y renueva tus medicamentos desde casa.</p>
+    <div class="hero-cta">
+      <button class="btn-filled-green" onclick="showVista(2)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg> Iniciar sesión</button>
+      <button class="btn-outlined" onclick="abrirModal()"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg> Crear cuenta</button>
+    </div>
+  </div>
+  <div class="onboarding-strip">
+    <h2>¿Cómo usar este portal?</h2>
+    <div class="ob-grid">
+      <div class="ob-card"><div class="ob-num">1</div><div class="ob-icon">👤</div><h3>Iniciar sesión</h3><p>Usa tu número de documento y contraseña para entrar de forma segura.</p></div>
+      <div class="ob-card"><div class="ob-num">2</div><div class="ob-icon">📅</div><h3>Elegir un servicio</h3><p>Navega por el menú para buscar tus citas o revisar tus resultados.</p></div>
+      <div class="ob-card"><div class="ob-num">3</div><div class="ob-icon">💬</div><h3>Pedir ayuda</h3><p>Usa los botones flotantes en la esquina cuando necesites ayuda.</p></div>
+    </div>
+  </div>
+  <footer class="app-footer">
+    <div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div>
+    <div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div>
+  </footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 2 — LOGIN ═══════════════════════ -->
+<div class="vista" id="v2">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)" role="link" aria-label="Salud+ — Ir a página de inicio"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><button class="btn-text-inv" onclick="showVista(1)" aria-label="Volver a la página de inicio">← Inicio</button></div>
+  </header>
+  <div class="login-wrap">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(1)" aria-label="Volver al inicio">← Volver al inicio</button><button class="btn-nav" onclick="showVista(3)" aria-label="Ir al panel principal" style="display:none">Siguiente →</button></div>
+    <h1>Ingresa a tu portal</h1>
+    <!-- Ícono ayuda login — Ley de Jakob (V2, Global) -->
+    <div class="help-hint" role="note" aria-label="Consejo de ayuda para iniciar sesión">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <span>¿Necesitas ayuda? Llama gratis al <strong>0800-123-456</strong> o usa el botón de WhatsApp abajo.</span>
+    </div>
+    <div class="banner-ctx"><span style="flex-shrink:0;font-size:18px;margin-top:1px" aria-hidden="true">💡</span><span>Si te equivocas, el sistema te avisará de inmediato para que puedas corregirlo.</span></div>
+    <div class="snack-info" id="v2-toast"><span style="font-size:20px">✓</span><span>¡Bienvenido Germán! Ya estás dentro de tu portal.</span></div>
+    <div class="banner-error" id="v2-error"><strong>No encontramos ese número en el sistema.</strong><p>Revisa que no tenga puntos ni espacios — solo escribe los dígitos.<br><br>¿La clave no funciona? → <a>Recuperar contraseña</a><br>¿Primera vez aquí? → <a onclick="showVista(1)">Crea tu cuenta gratis</a></p></div>
+    <div class="step-group"><div class="step-head"><div class="step-badge">1</div><label for="v2doc">Tu número de documento</label></div><div class="field-wrap" style="margin-bottom:0"><input class="md-input" type="text" id="v2doc" placeholder="Ej: 1020304050" aria-label="Número de documento de identidad" aria-required="true" autocomplete="username"><span class="field-supporting">Solo dígitos, sin puntos ni espacios (8 a 10 caracteres).</span></div></div>
+    <div class="step-group"><div class="step-head"><div class="step-badge">2</div><label for="v2pwd">Tu contraseña</label></div><div class="field-wrap" style="margin-bottom:0"><input class="md-input" type="password" id="v2pwd" placeholder="Tu clave secreta" onkeyup="chkCaps(event)" aria-label="Contraseña de acceso al portal" aria-required="true" autocomplete="current-password"><div class="caps-warn" id="v2caps" role="alert" aria-live="polite">⚠ Mayúsculas activadas — revisa tu contraseña</div><span class="field-supporting">🔒 Es la contraseña que recibiste por correo.</span></div></div>
+    <button class="btn-filled" style="width:100%;padding:18px;font-size:17px;margin-top:16px;border-radius:12px;justify-content:center" onclick="doLogin()" aria-label="Ingresar al portal de salud">Ingresar a mi portal →</button>
+    <div class="recovery-section"><p>¿Necesitas ayuda?</p><a href="tel:0800123456" aria-label="Llamar a recuperación de contraseña">🔑 Olvidaste tu contraseña</a><a onclick="showVista(1)" aria-label="Ir a crear una nueva cuenta" role="button">✎ Crea tu cuenta</a></div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 3 — DASHBOARD ═══════════════════════ -->
+<div class="vista" id="v3">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><div class="user-chip" style="cursor:pointer;position:relative" id="user-menu-trigger" onclick="toggleUserMenu()" aria-haspopup="true" aria-expanded="false" aria-label="Menú de usuario Germán"><div class="user-avatar">GL</div><span class="user-name">Germán</span><i data-lucide="chevron-down" style="width:14px;height:14px;stroke:#fff;margin-left:2px"></i></div><button class="btn-text-inv" onclick="showVista(1)">← Inicio</button>
+      <div id="user-dropdown" style="display:none;position:absolute;top:60px;right:20px;background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-md);box-shadow:var(--elev-3);z-index:200;min-width:180px;overflow:hidden">
+        <button onclick="showVista(1)" style="width:100%;text-align:left;padding:14px 18px;font-size:14px;font-weight:600;color:var(--md-on-surface);background:transparent;border:none;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--md-outline-var)"><i data-lucide="user" style="width:16px;height:16px;stroke:var(--md-on-surface-var)"></i> Mi perfil</button>
+        <button onclick="showVista(1)" style="width:100%;text-align:left;padding:14px 18px;font-size:14px;font-weight:600;color:var(--md-error);background:transparent;border:none;cursor:pointer;font-family:var(--font);display:flex;align-items:center;gap:10px"><i data-lucide="log-out" style="width:16px;height:16px;stroke:var(--md-error)"></i> Cerrar sesión</button>
+      </div>
+    </div>
+  </header>
+  <div class="dash-wrap">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(2)">← Atrás</button><button class="btn-nav" onclick="showVista(4)">Siguiente →</button></div>
+    <div class="welcome-card"><div class="wc-icon">✅</div><div><h2>¡Bienvenido, Germán!</h2><p>Ya estás dentro de tu portal de salud.</p></div></div>
+    <div class="voice-card"><span style="font-size:20px;flex-shrink:0;margin-top:1px">💡</span><span><strong>"Ya estás adentro, Germán. Tienes 6 opciones. La primera arriba a la izquierda es para pedir tu cita médica."</strong></span></div>
+    <div class="section-header"><h2>¿Qué necesitas hacer hoy?</h2><p>Selecciona lo que necesitas</p></div>
+    <div class="tools-grid" role="navigation" aria-label="Accesos directos a servicios">
+      <div class="tool-card" onclick="showVista(4)" role="button" aria-label="Ir a Tu cita médica" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showVista(4)"><div class="tool-icon-wrap" aria-hidden="true"><i data-lucide="calendar-days" style="width:24px;height:24px;stroke:var(--md-primary)"></i></div><div class="tool-name">Tu cita</div></div>
+      <div class="tool-card" onclick="showVista(8)" role="button" aria-label="Ir a Tus medicamentos" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showVista(8)"><div class="tool-icon-wrap" aria-hidden="true"><i data-lucide="pill" style="width:24px;height:24px;stroke:var(--md-primary)"></i></div><div class="tool-name">Tus medicamentos</div></div>
+      <div class="tool-card" onclick="showVista(9)" role="button" aria-label="Ir a Tu historial médico" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showVista(9)"><div class="tool-icon-wrap" aria-hidden="true"><i data-lucide="clipboard-list" style="width:24px;height:24px;stroke:var(--md-primary)"></i></div><div class="tool-name">Tu historial</div></div>
+      <div class="tool-card" onclick="showVista(10)" role="button" aria-label="Ir a Tus autorizaciones" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showVista(10)"><div class="tool-icon-wrap" aria-hidden="true"><i data-lucide="file-check" style="width:24px;height:24px;stroke:var(--md-primary)"></i></div><div class="tool-name">Tus autorizaciones</div></div>
+      <div class="tool-card" onclick="showVista(11)" role="button" aria-label="Ir a Tus resultados de laboratorio" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showVista(11)"><div class="tool-icon-wrap" aria-hidden="true"><i data-lucide="microscope" style="width:24px;height:24px;stroke:var(--md-primary)"></i></div><div class="tool-name">Tus resultados</div></div>
+      <div class="tool-card" onclick="showVista(12)" role="button" aria-label="Ir a Ayuda y soporte" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')showVista(12)"><div class="tool-icon-wrap" aria-hidden="true"><i data-lucide="life-buoy" style="width:24px;height:24px;stroke:var(--md-primary)"></i></div><div class="tool-name">Ayuda</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="quick-section"><h3>Acceso rápido</h3><div class="quick-btns"><button class="quick-btn" onclick="window.open('tel:0800123456')" aria-label="Llamar a urgencias al número 0800-123-456">📞 Llamar a Urgencias</button><button class="quick-btn" onclick="showVista(7)" aria-label="Ver sedes de salud cercanas">📍 Ver tus sedes cercanas</button></div></div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 4 — CITA ═══════════════════════ -->
+<div class="vista" id="v4">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><span style="color:rgba(255,255,255,.8);font-size:15px;font-weight:600">Agendar cita</span><button class="btn-text-inv" onclick="showVista(3)" aria-label="Volver al panel">← Panel</button></div>
+  </header>
+
+  <!-- Resumen sticky (GOMS: datos persistentes visibles) -->
+  <div class="cita-sticky-summary" id="cita-sticky" aria-live="polite" aria-label="Resumen de tu cita seleccionada">
+    <svg style="flex-shrink:0" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><polyline points="9 16 11 18 15 14"/></svg>
+    <span id="sticky-esp-text">—</span>
+    <span class="cita-sticky-pill" id="sticky-hora-text">Sin horario aún</span>
+  </div>
+  <div class="cita-wrap">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(3)">← Atrás</button><button class="btn-nav" onclick="cambiarEsp()">Reiniciar</button></div>
+    <div class="md-stepper">
+      <div class="md-step active" id="v4s1" onclick="v4Step(1)"><div class="step-dot">1</div> Especialidad</div>
+      <div class="md-step upcoming" id="v4s2" onclick="v4Step(2)"><div class="step-dot">2</div> Horarios</div>
+      <div class="md-step upcoming" id="v4s3" onclick="v4Step(3)"><div class="step-dot">3</div> Confirmar</div>
+    </div>
+    <div class="snack-success" id="v4-toast-verde">
+      <div class="snack-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+      <div><span class="snack-title">¡Germán, tu cita quedó agendada!</span><span class="snack-msg">Los datos han sido registrados. Recibirás la confirmación por:</span><div class="snack-chips"><span class="chip">📧 Correo</span><span class="chip">📱 SMS</span><span class="chip">💬 WhatsApp</span></div></div>
+    </div>
+    <div class="accordion-card">
+      <div class="accordion-hdr" onclick="toggleTut()">¿Cómo agendar tu cita? — Sigue estos pasos simples <span id="tutarrow">▼</span></div>
+      <div class="accordion-body open" id="tutbody">
+        <div class="tut-step"><div class="tut-num">1</div><p class="tut-text">Selecciona la lista de <strong>especialidades médicas</strong> y elige la que necesitas.</p></div>
+        <div class="tut-step"><div class="tut-num">2</div><p class="tut-text">Haz clic en <strong>"Seleccionar"</strong> en el horario que te quede mejor.</p></div>
+        <div class="tut-step" style="margin-bottom:0"><div class="tut-num">3</div><p class="tut-text"><strong>Confirma tu cita</strong> al final. Te avisaremos por correo y WhatsApp.</p></div>
+      </div>
+    </div>
+    <div style="margin-bottom:24px">
+      <div class="field-label" style="margin-bottom:8px">Acceso rápido — últimas especialidades</div>
+      <div class="esp-recientes" role="group" aria-label="Especialidades recientes de Germán">
+        <button class="esp-chip" onclick="selEspRapido('Medicina General')" aria-label="Seleccionar Medicina General rápidamente">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"/><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"/><circle cx="20" cy="10" r="2"/></svg> Medicina General
+        </button>
+        <button class="esp-chip" onclick="selEspRapido('Neurología')" aria-label="Seleccionar Neurología rápidamente">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96-.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 1.44-4.66Z"/><path d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96-.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-1.44-4.66Z"/></svg> Neurología
+        </button>
+        <button class="esp-chip" onclick="selEspRapido('Cardiología')" aria-label="Seleccionar Cardiología rápidamente">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg> Cardiología
+        </button>
+      </div>
+      <div class="field-label" style="margin-bottom:10px">Todas las especialidades</div>
+      <button class="select-btn" onclick="toggleEsp()" aria-label="Abrir lista de especialidades médicas"><span>🏥 Selecciona tu especialidad médica</span><span id="esparrow">▼</span></button>
+      <div class="select-menu" id="esplist">
+        <div class="select-item" onclick="selEsp(this,'Medicina General')">Medicina General</div>
+        <div class="select-item" onclick="selEsp(this,'Cardiología')">Cardiología</div>
+        <div class="select-item" onclick="selEsp(this,'Oftalmología')">Oftalmología</div>
+        <div class="select-item sel" onclick="selEsp(this,'Neurocirugía')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg> Neurocirugía</div>
+        <div class="select-item" onclick="selEsp(this,'Neurología')">Neurología</div>
+        <div class="select-item" onclick="selEsp(this,'Oncología')">Oncología</div>
+        <div class="select-item" onclick="selEsp(this,'Endocrinología')">Endocrinología</div>
+      </div>
+    </div>
+    <div class="horarios-sec" id="horarios">
+      <div class="field-label" style="margin-bottom:10px">Horarios disponibles</div>
+      <button class="select-btn" onclick="toggleHor()" id="hor-btn"><span>📅 Selecciona un horario disponible</span><span id="horarrow">▼</span></button>
+      <div class="select-menu" id="horlist">
+        <div class="select-item" onclick="selHorarioDD(this,'Lunes 15 Ene · 9:00–10:00 AM · Dr. Carlos Méndez','hc1')" style="flex-direction:column;align-items:flex-start;gap:4px;padding:16px 20px"><strong>Lunes 15 de Enero · 9:00 – 10:00 AM</strong><span style="font-size:13px;color:var(--md-on-surface-var)">👨‍⚕️ Dr. Carlos Méndez Rojas · 📞 300 123 4567</span><span style="font-size:13px;color:var(--md-on-surface-var)">📍 Consultorio 203 – Edificio Principal</span><button class="btn-map" onclick="event.stopPropagation();abrirMapa()" style="margin-top:6px">📍 Ver en mapa</button></div>
+        <div class="select-item" onclick="selHorarioDD(this,'Miércoles 17 Ene · 2:00–3:00 PM · Dra. Ana Patricia','hc2')" style="flex-direction:column;align-items:flex-start;gap:4px;padding:16px 20px"><strong>Miércoles 17 de Enero · 2:00 – 3:00 PM</strong><span style="font-size:13px;color:var(--md-on-surface-var)">👩‍⚕️ Dra. Ana Patricia Vargas · 📞 300 987 6543</span><span style="font-size:13px;color:var(--md-on-surface-var)">📍 Consultorio 308 – Edificio Principal</span><button class="btn-map" onclick="event.stopPropagation();abrirMapa()" style="margin-top:6px">📍 Ver en mapa</button></div>
+        <div class="select-item" onclick="selHorarioDD(this,'Viernes 19 Ene · 11:00 AM–12:00 PM · Dr. Roberto Silva','hc3')" style="flex-direction:column;align-items:flex-start;gap:4px;padding:16px 20px"><strong>Viernes 19 de Enero · 11:00 AM – 12:00 PM</strong><span style="font-size:13px;color:var(--md-on-surface-var)">👨‍⚕️ Dr. Roberto Silva Casares · 📞 300 555 6677</span><span style="font-size:13px;color:var(--md-on-surface-var)">📍 Consultorio 021 – Edificio Especialidades</span><button class="btn-map" onclick="event.stopPropagation();abrirMapa()" style="margin-top:6px">📍 Ver en mapa</button></div>
+      </div>
+      <div class="confirm-sec" id="confirmsec" style="margin-top:24px">
+        <button class="btn-confirm" onclick="confirmarCita()" aria-label="Confirmar mi cita médica">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg> Confirmar mi cita
+        </button>
+        <p class="confirm-note">Al confirmar, recibirás los detalles por correo electrónico, SMS y WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 5 — ACERCA DE ═══════════════════════ -->
+<div class="vista" id="v5">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <nav class="top-nav">
+      <a class="nav-item" onclick="showVista(1)">Inicio</a>
+      <a class="nav-item active" onclick="showVista(5)">Acerca de</a>
+      <a class="nav-item" onclick="showVista(6)">Servicios</a>
+      <a class="nav-item" onclick="showVista(7)">Centros</a>
+    </nav>
+    <div class="bar-actions"><button class="btn-text-inv" onclick="showVista(2)">Iniciar sesión →</button></div>
+  </header>
+
+  <div class="page-hero">
+    <div class="page-eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Nuestra historia
+    </div>
+    <h1>Salud pública <em>al alcance de todos</em></h1>
+    <p>Portal Salud+ es una plataforma digital creada para acercar los servicios de salud a todos los ciudadanos colombianos, sin importar dónde estén.</p>
+  </div>
+
+  <div class="page-wrap" style="padding-top:32px">
+    <div class="nav-row" style="padding:0 0 16px 0;margin-bottom:24px"><button class="btn-nav" onclick="showVista(1)">← Inicio</button><div style="display:flex;gap:8px"><button class="btn-tonal" onclick="showVista(6)">Ver servicios →</button></div></div>
+
+    <!-- STATS -->
+    <div class="stat-grid">
+      <div class="stat-card"><span class="stat-num">2.8M</span><div class="stat-label">Usuarios registrados</div><div style="font-size:10px;color:var(--md-on-surface-var);margin-top:4px">Datos MSPS · 2024</div></div>
+      <div class="stat-card"><span class="stat-num">47</span><div class="stat-label">Centros de salud activos</div><div style="font-size:10px;color:var(--md-on-surface-var);margin-top:4px">Red afiliada · 2024</div></div>
+      <div class="stat-card"><span class="stat-num">98%</span><div class="stat-label">Satisfacción del usuario</div><div style="font-size:10px;color:var(--md-on-surface-var);margin-top:4px">Encuesta MSPS · 2024</div></div>
+      <div class="stat-card"><span class="stat-num">24/7</span><div class="stat-label">Disponibilidad del portal</div><div style="font-size:10px;color:var(--md-on-surface-var);margin-top:4px">Promedio anual verificado</div></div>
+    </div>
+
+    <!-- MISIÓN / VISIÓN -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px">
+      <div style="background:var(--md-primary-container);border-radius:var(--shape-lg);padding:24px;border:1px solid rgba(10,61,95,.15)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:36px;height:36px;background:var(--md-primary);border-radius:var(--shape-sm);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🎯</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--md-on-primary-cont)">Nuestra misión</h3>
+        </div>
+        <p style="font-size:14px;color:var(--md-on-primary-cont);line-height:1.7;opacity:.9">Garantizar el acceso equitativo, oportuno y de calidad a los servicios de salud para todos los ciudadanos colombianos a través de la tecnología.</p>
+      </div>
+      <div style="background:var(--md-tertiary-cont);border-radius:var(--shape-lg);padding:24px;border:1px solid rgba(0,107,78,.15)">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+          <div style="width:36px;height:36px;background:var(--md-tertiary);border-radius:var(--shape-sm);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0">🔭</div>
+          <h3 style="font-size:16px;font-weight:700;color:var(--md-on-tertiary-cont)">Nuestra visión</h3>
+        </div>
+        <p style="font-size:14px;color:var(--md-on-tertiary-cont);line-height:1.7;opacity:.9">Ser el sistema de salud digital más accesible e inclusivo de Latinoamérica, conectando a cada persona con el cuidado que merece.</p>
+      </div>
+    </div>
+
+    <!-- VALORES -->
+    <div class="section-title" style="margin-bottom:6px">Nuestros valores</div>
+    <p class="section-sub">Los principios que guían cada decisión que tomamos</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:28px">
+      <div class="value-card"><div class="value-icon blue">🤝</div><div class="value-text"><h3>Equidad</h3><p>El acceso a la salud es un derecho, no un privilegio. Trabajamos para eliminar las barreras.</p></div></div>
+      <div class="value-card"><div class="value-icon green">🔒</div><div class="value-text"><h3>Privacidad</h3><p>Tus datos de salud son confidenciales. Los protegemos con los más altos estándares de seguridad.</p></div></div>
+      <div class="value-card"><div class="value-icon blue">💡</div><div class="value-text"><h3>Innovación</h3><p>Buscamos constantemente nuevas formas de hacer la salud más simple y accesible para todos.</p></div></div>
+      <div class="value-card"><div class="value-icon green">❤️</div><div class="value-text"><h3>Humanidad</h3><p>Detrás de cada cita hay una persona. Diseñamos pensando en la dignidad y el bienestar de cada usuario.</p></div></div>
+    </div>
+
+    <!-- HISTORIA / TIMELINE -->
+    <div class="section-title" style="margin-bottom:6px">Nuestra historia</div>
+    <p class="section-sub">Cómo llegamos hasta aquí</p>
+    <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-lg);padding:24px 28px;margin-bottom:28px;border:1px solid var(--md-outline-var)">
+      <div class="timeline">
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2018</div><div class="tl-title">Proyecto piloto en Bogotá</div><div class="tl-desc">Se lanza la primera versión del portal con 3 centros de salud y servicios básicos de citas.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2020</div><div class="tl-title">Expansión nacional y respuesta COVID-19</div><div class="tl-desc">Durante la pandemia, el portal se convirtió en herramienta esencial. Se incorporaron teleconsultas y el módulo de resultados de laboratorio.</div></div>
+        <div class="tl-item"><div class="tl-dot"></div><div class="tl-year">2022</div><div class="tl-title">Certificación de accesibilidad WCAG 2.1</div><div class="tl-desc">Rediseño total para usuarios con discapacidad visual, motora y cognitiva. Integración del asistente de voz.</div></div>
+        <div class="tl-item" style="margin-bottom:0"><div class="tl-dot"></div><div class="tl-year">2025</div><div class="tl-title">Portal Salud+ v5 — Material Design 3</div><div class="tl-desc">Nueva interfaz unificada con sistema de diseño MD3, Noto Sans y cobertura en los 32 departamentos del país.</div></div>
+      </div>
+    </div>
+
+    <!-- EQUIPO -->
+    <div class="section-title" style="margin-bottom:6px">Equipo directivo</div>
+    <p class="section-sub">Las personas que lideran el portal</p>
+    <div class="team-grid" style="margin-bottom:28px">
+      <div class="team-card"><div class="team-avatar team-av-blue">👩‍⚕️</div><div class="team-info"><h3>Dra. Claudia Restrepo</h3><p>Directora General</p><div class="team-chips"><span class="chip" style="font-size:11px;padding:3px 9px">Salud Pública</span><span class="chip" style="font-size:11px;padding:3px 9px">20 años exp.</span></div></div></div>
+      <div class="team-card"><div class="team-avatar team-av-green">👨‍💻</div><div class="team-info"><h3>Ing. Mateo Ospina</h3><p>Director de Tecnología</p><div class="team-chips"><span class="chip" style="font-size:11px;padding:3px 9px">Sistemas</span><span class="chip" style="font-size:11px;padding:3px 9px">UX/UI</span></div></div></div>
+      <div class="team-card"><div class="team-avatar team-av-sec">👩‍🏫</div><div class="team-info"><h3>Lic. Sandra Morales</h3><p>Directora de Accesibilidad</p><div class="team-chips"><span class="chip" style="font-size:11px;padding:3px 9px">Inclusión</span><span class="chip" style="font-size:11px;padding:3px 9px">WCAG</span></div></div></div>
+    </div>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <div class="section-title" style="margin-bottom:6px">Preguntas frecuentes</div>
+    <p class="section-sub" style="margin-bottom:16px">Resolvemos tus dudas más comunes</p>
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿El portal es gratuito? <span>▼</span></div><div class="accordion-plain-body">Sí, completamente gratuito para todos los usuarios del sistema de salud colombiano. No tiene costo adicional ni suscripciones.</div></div>
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Mis datos están seguros? <span>▼</span></div><div class="accordion-plain-body">Todos los datos son cifrados con AES-256 y almacenados en servidores certificados en Colombia, bajo las leyes de protección de datos (Ley 1581 de 2012).</div></div>
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Puedo usarlo sin internet? <span>▼</span></div><div class="accordion-plain-body">Ofrecemos acceso alternativo por línea gratuita (0800-123-456) y puntos de atención presencial en todos los centros de salud afiliados.</div></div>
+    <div class="accordion-plain" style="margin-bottom:0"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Qué EPS están afiliadas? <span>▼</span></div><div class="accordion-plain-body">Actualmente tenemos convenio con las principales EPS del país: Sura, Compensar, Nueva EPS, Sanitas, Coomeva, Famisanar y más de 15 entidades regionales.</div></div>
+
+    <div style="margin-top:28px;text-align:center">
+      <button class="btn-filled" onclick="showVista(2)" style="margin-right:10px">Acceder al portal →</button>
+      <button class="btn-outlined" onclick="showVista(6)">Ver nuestros servicios</button>
+    </div>
+  </div>
+
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 6 — SERVICIOS ═══════════════════════ -->
+<div class="vista" id="v6">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <nav class="top-nav">
+      <a class="nav-item" onclick="showVista(1)">Inicio</a>
+      <a class="nav-item" onclick="showVista(5)">Acerca de</a>
+      <a class="nav-item active" onclick="showVista(6)">Servicios</a>
+      <a class="nav-item" onclick="showVista(7)">Centros</a>
+    </nav>
+    <div class="bar-actions"><button class="btn-text-inv" onclick="showVista(2)">Iniciar sesión →</button></div>
+  </header>
+
+  <div class="page-hero">
+    <div class="page-eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18"/></svg>
+      Catálogo completo
+    </div>
+    <h1>Todos tus servicios de salud, <em>en un solo lugar</em></h1>
+    <p>Desde agendar una cita hasta consultar tus resultados de laboratorio, todo lo que necesitas está a un clic de distancia.</p>
+  </div>
+
+  <div class="page-wrap" style="padding-top:28px">
+    <div class="nav-row" style="padding:0 0 16px 0;margin-bottom:24px"><button class="btn-nav" onclick="showVista(1)">← Inicio</button><button class="btn-tonal" onclick="showVista(7)">Ver centros →</button></div>
+
+    <div class="alert-banner"><span style="font-size:18px;flex-shrink:0;margin-top:1px">🎙</span><span><strong>Consejo de accesibilidad:</strong> Todos los servicios están disponibles también por teléfono llamando gratis al 0800-123-456.</span></div>
+
+    <!-- TABS -->
+    <div class="serv-tabs">
+      <button class="serv-tab active" onclick="showTab('citas')">📅 Citas médicas</button>
+      <button class="serv-tab" onclick="showTab('medicamentos')">💊 Medicamentos</button>
+      <button class="serv-tab" onclick="showTab('resultados')">🔬 Resultados</button>
+      <button class="serv-tab" onclick="showTab('autorizaciones')">📄 Autorizaciones</button>
+      <button class="serv-tab" onclick="showTab('historial')">📋 Historial</button>
+    </div>
+
+    <!-- PANEL: CITAS -->
+    <div class="serv-panel active" id="tab-citas">
+      <div class="serv-grid">
+        <div class="serv-card">
+          <div class="serv-card-head"><div class="serv-card-icon">🏥</div><h3>Cita presencial</h3></div>
+          <p>Agenda tu cita en cualquiera de nuestros 47 centros afiliados. Elige especialidad, médico, fecha y hora.</p>
+          <div class="serv-tags"><span class="chip chip-blue">Disponible 24/7</span><span class="chip chip-green">Confirmación inmediata</span></div>
+        </div>
+        <div class="serv-card">
+          <div class="serv-card-head"><div class="serv-card-icon green">💻</div><h3>Teleconsulta</h3></div>
+          <p>Consulta por videollamada desde casa. Ideal para seguimiento, resultados y consultas no urgentes.</p>
+          <div class="serv-tags"><span class="chip chip-green">Sin desplazamiento</span><span class="chip chip-blue">Desde 30 min</span></div>
+        </div>
+        <div class="serv-card">
+          <div class="serv-card-head"><div class="serv-card-icon">🚨</div><h3>Urgencias</h3></div>
+          <p>Para situaciones urgentes, encuentra el centro de urgencias más cercano y disponible en este momento.</p>
+          <div class="serv-tags"><span class="chip" style="background:var(--md-error-cont);color:var(--md-on-error-cont);border-color:transparent">Atención inmediata</span></div>
+        </div>
+        <div class="serv-card">
+          <div class="serv-card-head"><div class="serv-card-icon green">🏠</div><h3>Atención domiciliaria</h3></div>
+          <p>Para pacientes con movilidad reducida o postoperatorios. Un profesional va hasta tu domicilio.</p>
+          <div class="serv-tags"><span class="chip chip-green">Médicos certificados</span></div>
+        </div>
+      </div>
+      <div class="section-title" style="margin-bottom:12px;font-size:16px">¿Cómo agendar tu cita?</div>
+      <div class="process-steps">
+        <div class="proc-step"><div class="proc-num">1</div><h4>Inicia sesión</h4><p>Usa tu documento y contraseña</p></div>
+        <div class="proc-step"><div class="proc-num">2</div><h4>Elige especialidad</h4><p>Filtra por tipo de médico</p></div>
+        <div class="proc-step"><div class="proc-num">3</div><h4>Selecciona horario</h4><p>Ve los disponibles en tiempo real</p></div>
+        <div class="proc-step"><div class="proc-num">4</div><h4>Confirma</h4><p>Recibes aviso por correo y SMS</p></div>
+      </div>
+      <div class="info-row">
+        <div class="info-card"><h4>📋 Especialidades disponibles</h4><ul><li>Medicina general y familiar</li><li>Cardiología y Neurología</li><li>Oftalmología y Otorrinolaringología</li><li>Oncología y Endocrinología</li><li>Pediatría y Ginecología</li><li>Traumatología y Ortopedia</li></ul></div>
+        <div class="info-card"><h4>ℹ️ Información importante</h4><ul><li>Lleva tu documento de identidad</li><li>Consulta con hasta 48h de anticipación</li><li>Cancelaciones con mínimo 24h de aviso</li><li>Puedes reagendar sin penalización</li><li>Traer autorizaciones si aplica</li></ul></div>
+      </div>
+      <button class="btn-filled" onclick="showVista(2)" style="width:100%;justify-content:center;padding:16px;border-radius:12px">Agendar mi cita ahora →</button>
+    </div>
+
+    <!-- PANEL: MEDICAMENTOS -->
+    <div class="serv-panel" id="tab-medicamentos">
+      <div class="serv-grid">
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">💊</div><h3>Renovación de fórmulas</h3></div><p>Renueva tus medicamentos de uso crónico sin necesidad de una nueva consulta médica, si aplica tu condición.</p><div class="serv-tags"><span class="chip chip-green">Sin cita previa</span><span class="chip chip-blue">Hasta 3 meses</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">🏪</div><h3>Punto de dispensación</h3></div><p>Ubica la farmacia más cercana afiliada a tu EPS y consulta disponibilidad de medicamentos en tiempo real.</p><div class="serv-tags"><span class="chip chip-blue">+120 puntos</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">📦</div><h3>Entrega a domicilio</h3></div><p>Medicamentos crónicos y de control enviados directamente a tu casa. Aplica para ciertas zonas y EPS.</p><div class="serv-tags"><span class="chip chip-green">Gratis con EPS</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">🔔</div><h3>Alertas de dosis</h3></div><p>Configura recordatorios para no olvidar tus medicamentos. Recibirás notificaciones por SMS o WhatsApp.</p><div class="serv-tags"><span class="chip chip-blue">Personalizable</span></div></div>
+      </div>
+      <div class="info-row">
+        <div class="info-card"><h4>✅ Medicamentos incluidos</h4><ul><li>Medicamentos del Plan de Beneficios (PBS)</li><li>Tratamientos de enfermedades crónicas</li><li>Oncológicos bajo prescripción activa</li><li>Insulinas y biológicos especiales</li></ul></div>
+        <div class="info-card"><h4>⚠️ Condiciones</h4><ul><li>Requiere fórmula médica vigente</li><li>Afiliación activa a EPS</li><li>Renovación cada 3 meses máximo</li><li>Algunos requieren control médico previo</li></ul></div>
+      </div>
+    </div>
+
+    <!-- PANEL: RESULTADOS -->
+    <div class="serv-panel" id="tab-resultados">
+      <div class="serv-grid">
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">🔬</div><h3>Resultados de laboratorio</h3></div><p>Consulta tus exámenes de sangre, orina, biopsias y más. Disponibles entre 24 y 72 horas después de la toma.</p><div class="serv-tags"><span class="chip chip-blue">Descargable en PDF</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">🩻</div><h3>Imágenes diagnósticas</h3></div><p>Radiografías, ecografías, resonancias y tomografías disponibles en alta resolución para compartir con tu médico.</p><div class="serv-tags"><span class="chip chip-green">Formato DICOM</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">📊</div><h3>Seguimiento de indicadores</h3></div><p>Visualiza la evolución de tus resultados a lo largo del tiempo. Gráficas de glucemia, colesterol, presión y más.</p><div class="serv-tags"><span class="chip chip-blue">Histórico completo</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">📤</div><h3>Compartir con especialistas</h3></div><p>Envía tus resultados de forma segura a cualquier médico dentro o fuera del portal mediante enlace cifrado.</p><div class="serv-tags"><span class="chip chip-green">Enlace con expiración</span></div></div>
+      </div>
+      <div class="alert-banner" style="background:var(--md-primary-container);border-left-color:var(--md-primary);color:var(--md-on-primary-cont)">
+        <span style="font-size:18px;flex-shrink:0">🔒</span>
+        <span><strong>Privacidad garantizada:</strong> Solo tú y los médicos autorizados pueden ver tus resultados. Todos los archivos están cifrados con AES-256.</span>
+      </div>
+    </div>
+
+    <!-- PANEL: AUTORIZACIONES -->
+    <div class="serv-panel" id="tab-autorizaciones">
+      <div class="serv-grid">
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">📄</div><h3>Solicitar autorización</h3></div><p>Pide autorización para procedimientos, cirugías, medicamentos no PBS y servicios especiales directamente desde el portal.</p><div class="serv-tags"><span class="chip chip-blue">Respuesta en 5 días</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">🔍</div><h3>Consultar estado</h3></div><p>Revisa en tiempo real el estado de tus solicitudes de autorización. Notificaciones automáticas al correo y WhatsApp.</p><div class="serv-tags"><span class="chip chip-green">Tiempo real</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">📁</div><h3>Historial de autorizaciones</h3></div><p>Consulta todas las autorizaciones aprobadas, negadas o en proceso durante el último año de cobertura.</p><div class="serv-tags"><span class="chip chip-blue">Exportable</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">⚖️</div><h3>Tutelas y recursos</h3></div><p>Si tu autorización fue negada, te orientamos en el proceso de impugnación y acciones legales disponibles.</p><div class="serv-tags"><span class="chip chip-green">Asesoría gratuita</span></div></div>
+      </div>
+    </div>
+
+    <!-- PANEL: HISTORIAL -->
+    <div class="serv-panel" id="tab-historial">
+      <div class="serv-grid">
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">📋</div><h3>Historia clínica digital</h3></div><p>Accede a tu historial médico completo: diagnósticos, tratamientos, hospitalizaciones y procedimientos previos.</p><div class="serv-tags"><span class="chip chip-blue">Desde tu EPS</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">💉</div><h3>Carnet de vacunación</h3></div><p>Revisa tu esquema de vacunación y las dosis pendientes. Descarga el certificado oficial del Ministerio de Salud.</p><div class="serv-tags"><span class="chip chip-green">Certificado oficial</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon">🧬</div><h3>Condiciones crónicas</h3></div><p>Seguimiento especializado para enfermedades como diabetes, hipertensión, EPOC y otras condiciones de manejo continuo.</p><div class="serv-tags"><span class="chip chip-blue">Programas especiales</span></div></div>
+        <div class="serv-card"><div class="serv-card-head"><div class="serv-card-icon green">📥</div><h3>Descargar historial</h3></div><p>Exporta tu historia clínica en PDF para llevar a consultas privadas, viajes o seguros médicos internacionales.</p><div class="serv-tags"><span class="chip chip-green">PDF certificado</span></div></div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 7 — CENTROS ═══════════════════════ -->
+<div class="vista" id="v7">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <nav class="top-nav">
+      <a class="nav-item" onclick="showVista(1)">Inicio</a>
+      <a class="nav-item" onclick="showVista(5)">Acerca de</a>
+      <a class="nav-item" onclick="showVista(6)">Servicios</a>
+      <a class="nav-item active" onclick="showVista(7)">Centros</a>
+    </nav>
+    <div class="bar-actions"><button class="btn-text-inv" onclick="showVista(2)">Iniciar sesión →</button></div>
+  </header>
+
+  <div class="page-hero">
+    <div class="page-eyebrow">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Bogotá y área metropolitana
+    </div>
+    <h1>Encuentra tu centro de salud <em>más cercano</em></h1>
+    <p>47 centros afiliados en toda Colombia. Busca por nombre, localidad o tipo de servicio.</p>
+  </div>
+
+  <div class="page-wrap" style="padding-top:28px">
+    <div class="nav-row" style="padding:0 0 16px 0;margin-bottom:24px"><button class="btn-nav" onclick="showVista(1)">← Inicio</button><button class="btn-tonal" onclick="showVista(6)">Ver servicios</button></div>
+
+    <!-- MAPA PLACEHOLDER -->
+    <div class="map-placeholder" onclick="window.open('https://maps.google.com/?q=centros+de+salud+Bogota+Colombia','_blank')">
+      <span style="font-size:40px">🗺️</span>
+      <p>Ver todos los centros en el mapa</p>
+      <small>Abre Google Maps con los centros afiliados</small>
+    </div>
+
+    <!-- BÚSQUEDA -->
+    <div class="search-bar-wrap" style="margin-bottom:16px">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="search-bar" type="text" placeholder="Buscar por nombre o dirección..." id="buscarCentro" oninput="filtrarCentros()">
+    </div>
+
+    <!-- FILTROS -->
+    <div class="filter-row">
+      <button class="filter-chip active" onclick="setFilter(this,'todos')">Todos</button>
+      <button class="filter-chip" onclick="setFilter(this,'hospital')">🏥 Hospital</button>
+      <button class="filter-chip" onclick="setFilter(this,'clinica')">🏨 Clínica</button>
+      <button class="filter-chip" onclick="setFilter(this,'consultorio')">🩺 Consultorio</button>
+      <button class="filter-chip" onclick="setFilter(this,'urgencias')">🚨 Urgencias 24h</button>
+    </div>
+
+    <!-- LISTA DE CENTROS -->
+    <div id="centros-lista">
+
+      <div class="centro-card" data-tipo="hospital" data-nombre="Hospital Universitario Mayor Méderi">
+        <div class="centro-head">
+          <div><span class="centro-tipo tipo-hospital">🏥 Hospital</span><div class="centro-name" style="margin-top:6px">Hospital Universitario Mayor Méderi</div><div class="centro-addr">📍 Calle 24 #29-45, Bogotá D.C.</div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="badge-open">● Abierto ahora</span><span class="badge-24">🕐 24 horas</span></div>
+        </div>
+        <div class="centro-details">
+          <div class="cd-item"><span class="cd-label">Teléfono</span><span class="cd-value">601 343-6600</span></div>
+          <div class="cd-item"><span class="cd-label">Horario</span><span class="cd-value">24 horas / 7 días</span></div>
+          <div class="cd-item"><span class="cd-label">Espera aprox.</span><span class="cd-value">~35 min</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span class="chip" style="font-size:12px">Cirugía</span><span class="chip" style="font-size:12px">UCI</span><span class="chip" style="font-size:12px">Urgencias</span><span class="chip" style="font-size:12px">Laboratorio</span></div>
+        <div class="centro-actions">
+          <button class="btn-tonal" onclick="showVista(2)">Agendar cita</button>
+          <button class="btn-nav" onclick="window.open('https://maps.google.com/?q=Hospital+Universitario+Mayor+Mederi+Bogota','_blank')">📍 Ver en mapa</button>
+          <button class="btn-nav" onclick="window.open('tel:6013436600')" aria-label="Llamar al Hospital Universitario Mayor Méderi: 601 343-6600">
+            <i data-lucide="phone" style="width:14px;height:14px;stroke:var(--md-on-surface-var);vertical-align:middle;margin-right:4px"></i> 601 343-6600
+          </button>
+        </div>
+      </div>
+
+      <div class="centro-card" data-tipo="clinica" data-nombre="Clínica del Country">
+        <div class="centro-head">
+          <div><span class="centro-tipo tipo-clinica">🏨 Clínica</span><div class="centro-name" style="margin-top:6px">Clínica del Country</div><div class="centro-addr">📍 Carrera 16 #82-57, Chapinero</div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="badge-open">● Abierto ahora</span></div>
+        </div>
+        <div class="centro-details">
+          <div class="cd-item"><span class="cd-label">Teléfono</span><span class="cd-value">601 530-0470</span></div>
+          <div class="cd-item"><span class="cd-label">Horario</span><span class="cd-value">Lun–Sáb 7am–7pm</span></div>
+          <div class="cd-item"><span class="cd-label">Espera aprox.</span><span class="cd-value">~20 min</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span class="chip" style="font-size:12px">Cardiología</span><span class="chip" style="font-size:12px">Oncología</span><span class="chip" style="font-size:12px">Neurología</span></div>
+        <div class="centro-actions">
+          <button class="btn-tonal" onclick="showVista(2)">Agendar cita</button>
+          <button class="btn-nav" onclick="window.open('https://maps.google.com/?q=Clinica+del+Country+Bogota','_blank')">📍 Ver en mapa</button>
+          <button class="btn-nav" onclick="window.open('tel:6015300470')" aria-label="Llamar a Clínica del Country: 601 530-0470">
+            <i data-lucide="phone" style="width:14px;height:14px;stroke:var(--md-on-surface-var);vertical-align:middle;margin-right:4px"></i> 601 530-0470
+          </button>
+        </div>
+      </div>
+
+      <div class="centro-card" data-tipo="urgencias" data-nombre="Centro de Urgencias Kennedy">
+        <div class="centro-head">
+          <div><span class="centro-tipo tipo-urgencias">🚨 Urgencias</span><div class="centro-name" style="margin-top:6px">Centro de Urgencias Kennedy</div><div class="centro-addr">📍 Diagonal 49F Sur #72J-70, Kennedy</div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="badge-open">● Abierto ahora</span><span class="badge-24">🕐 24 horas</span></div>
+        </div>
+        <div class="centro-details">
+          <div class="cd-item"><span class="cd-label">Teléfono</span><span class="cd-value">601 364-9000</span></div>
+          <div class="cd-item"><span class="cd-label">Horario</span><span class="cd-value">24 horas / 7 días</span></div>
+          <div class="cd-item"><span class="cd-label">Espera aprox.</span><span class="cd-value">~50 min</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span class="chip" style="font-size:12px">Urgencias</span><span class="chip" style="font-size:12px">Pediatría</span><span class="chip" style="font-size:12px">Trauma</span></div>
+        <div class="centro-actions">
+          <button class="btn-filled-green" onclick="window.open('https://maps.google.com/?q=Centro+de+Urgencias+Kennedy+Bogota','_blank')">🚨 Ir ahora</button>
+          <button class="btn-nav" onclick="window.open('tel:6013649000')" aria-label="Llamar al Centro de Urgencias Kennedy: 601 364-9000">
+            <i data-lucide="phone" style="width:14px;height:14px;stroke:var(--md-on-surface-var);vertical-align:middle;margin-right:4px"></i> 601 364-9000
+          </button>
+        </div>
+      </div>
+
+      <div class="centro-card" data-tipo="consultorio" data-nombre="Centro Médico Chapinero">
+        <div class="centro-head">
+          <div><span class="centro-tipo tipo-consultorio">🩺 Consultorio</span><div class="centro-name" style="margin-top:6px">Centro Médico Chapinero</div><div class="centro-addr">📍 Carrera 7 #57-12, Chapinero</div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="badge-closed">● Cerrado ahora</span></div>
+        </div>
+        <div class="centro-details">
+          <div class="cd-item"><span class="cd-label">Teléfono</span><span class="cd-value">601 211-4400</span></div>
+          <div class="cd-item"><span class="cd-label">Horario</span><span class="cd-value">Lun–Vie 8am–5pm</span></div>
+          <div class="cd-item"><span class="cd-label">Próx. apertura</span><span class="cd-value">Lun 8:00 AM</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span class="chip" style="font-size:12px">Medicina Gral.</span><span class="chip" style="font-size:12px">Odontología</span><span class="chip" style="font-size:12px">Nutrición</span></div>
+        <div class="centro-actions">
+          <button class="btn-tonal" onclick="showVista(2)">Agendar cita</button>
+          <button class="btn-nav" onclick="window.open('https://maps.google.com/?q=Centro+Medico+Chapinero+Bogota','_blank')">📍 Ver en mapa</button>
+        </div>
+      </div>
+
+      <div class="centro-card" data-tipo="hospital" data-nombre="Hospital Simón Bolívar">
+        <div class="centro-head">
+          <div><span class="centro-tipo tipo-hospital">🏥 Hospital</span><div class="centro-name" style="margin-top:6px">Hospital Simón Bolívar</div><div class="centro-addr">📍 Carrera 7 #165-00, Usaquén</div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="badge-open">● Abierto ahora</span><span class="badge-24">🕐 24 horas</span></div>
+        </div>
+        <div class="centro-details">
+          <div class="cd-item"><span class="cd-label">Teléfono</span><span class="cd-value">601 667-1972</span></div>
+          <div class="cd-item"><span class="cd-label">Horario</span><span class="cd-value">24 horas / 7 días</span></div>
+          <div class="cd-item"><span class="cd-label">Espera aprox.</span><span class="cd-value">~45 min</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span class="chip" style="font-size:12px">Quemados</span><span class="chip" style="font-size:12px">Urgencias</span><span class="chip" style="font-size:12px">Cirugía</span><span class="chip" style="font-size:12px">UCI</span></div>
+        <div class="centro-actions">
+          <button class="btn-tonal" onclick="showVista(2)">Agendar cita</button>
+          <button class="btn-nav" onclick="window.open('https://maps.google.com/?q=Hospital+Simon+Bolivar+Bogota','_blank')">📍 Ver en mapa</button>
+          <button class="btn-nav" onclick="window.open('tel:6016671972')" aria-label="Llamar al Hospital Simón Bolívar: 601 667-1972">
+            <i data-lucide="phone" style="width:14px;height:14px;stroke:var(--md-on-surface-var);vertical-align:middle;margin-right:4px"></i> 601 667-1972
+          </button>
+        </div>
+      </div>
+
+      <div class="centro-card" data-tipo="clinica" data-nombre="Clínica Palermo">
+        <div class="centro-head">
+          <div><span class="centro-tipo tipo-clinica">🏨 Clínica</span><div class="centro-name" style="margin-top:6px">Clínica Palermo</div><div class="centro-addr">📍 Calle 45 #13-90, Teusaquillo</div></div>
+          <div style="display:flex;flex-direction:column;gap:4px;align-items:flex-end"><span class="badge-open">● Abierto ahora</span></div>
+        </div>
+        <div class="centro-details">
+          <div class="cd-item"><span class="cd-label">Teléfono</span><span class="cd-value">601 310-1000</span></div>
+          <div class="cd-item"><span class="cd-label">Horario</span><span class="cd-value">Lun–Sáb 6am–10pm</span></div>
+          <div class="cd-item"><span class="cd-label">Espera aprox.</span><span class="cd-value">~15 min</span></div>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px"><span class="chip" style="font-size:12px">Oftalmología</span><span class="chip" style="font-size:12px">Ortopedia</span><span class="chip" style="font-size:12px">Imágenes</span></div>
+        <div class="centro-actions">
+          <button class="btn-tonal" onclick="showVista(2)">Agendar cita</button>
+          <button class="btn-nav" onclick="window.open('https://maps.google.com/?q=Clinica+Palermo+Bogota','_blank')">📍 Ver en mapa</button>
+          <button class="btn-nav" onclick="window.open('tel:6013101000')" aria-label="Llamar a Clínica Palermo: 601 310-1000">
+            <i data-lucide="phone" style="width:14px;height:14px;stroke:var(--md-on-surface-var);vertical-align:middle;margin-right:4px"></i> 601 310-1000
+          </button>
+        </div>
+      </div>
+
+    </div><!-- /centros-lista -->
+
+    <div id="no-resultados" style="display:none;text-align:center;padding:40px;color:var(--md-on-surface-var)">
+      <div style="font-size:40px;margin-bottom:12px">🔍</div>
+      <p style="font-size:16px;font-weight:600;color:var(--md-on-surface)">No se encontraron centros</p>
+      <p style="font-size:14px;margin-top:6px">Intenta con otro término o activa el filtro "Todos".</p>
+    </div>
+
+  </div>
+
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 8 — MEDICAMENTOS ═══════════════════════ -->
+<div class="vista" id="v8">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+  </header>
+  <div class="dash-hero">
+    <div class="dash-hero-eyebrow">💊 Medicamentos activos</div>
+    <h1>Tus <em>medicamentos</em></h1>
+    <p>Revisa tus tratamientos activos, dosis y fechas de renovación.</p>
+  </div>
+  <div class="dash-page-wrap" style="padding-top:24px">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(3)" aria-label="Volver al panel principal">← Volver al panel</button><button class="btn-tonal" onclick="showVista(9)" aria-label="Ir a tu historial médico">Tu historial →</button></div>
+
+    <div class="snack-info" id="v8-toast-renovar" style="display:none;background:var(--md-tertiary);color:#fff;border-radius:var(--shape-md);padding:14px 20px;margin-bottom:20px;align-items:center;gap:12px;font-size:15px;font-weight:600" role="alert" aria-live="assertive"><span style="font-size:20px" aria-hidden="true">✓</span><span>Solicitud de renovación enviada. Te avisaremos en 24 h.</span></div>
+
+    <div class="med-status-bar">
+      <div class="med-stat"><span class="med-stat-num green">3</span><div class="med-stat-lbl">Activos</div></div>
+      <div class="med-stat"><span class="med-stat-num warn">1</span><div class="med-stat-lbl">Por renovar</div></div>
+      <div class="med-stat"><span class="med-stat-num blue">30</span><div class="med-stat-lbl">Días prom. restantes</div></div>
+    </div>
+
+    <div class="section-title" style="margin-bottom:6px">Tratamientos actuales</div>
+    <p class="section-sub" style="margin-bottom:12px">Germán, estos son tus medicamentos prescritos</p>
+
+    <!-- Búsqueda predictiva — KLM reduce operadores M+P+K -->
+    <div class="med-search-wrap" role="search" aria-label="Buscar medicamentos">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="med-search-input" type="search" id="med-buscador" placeholder="Buscar medicamento..." autocomplete="off" aria-label="Buscar entre tus medicamentos" oninput="buscarMed(this.value)" onfocus="buscarMed(this.value)" onblur="setTimeout(()=>cerrarSugerencias(),150)">
+      <div class="med-suggestions" id="med-sugerencias" role="listbox" aria-label="Sugerencias de medicamentos"></div>
+    </div>
+
+    <!-- Medicamento 1 -->
+    <div class="med-card" role="article" aria-label="Medicamento: Metformina 500 mg">
+      <div class="med-card-head">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="med-icon blue" aria-hidden="true">💊</div>
+          <div>
+            <div class="med-name">Metformina 500 mg</div>
+            <div class="med-generic">Para el azúcar en la sangre (diabetes) · Dr. Carlos Méndez</div>
+          </div>
+        </div>
+        <span class="badge-activo" aria-label="Estado: Activo">● Activo</span>
+      </div>
+      <div class="med-details">
+        <div class="med-detail-item"><div class="med-detail-lbl">Dosis</div><div class="med-detail-val">1 tableta</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Frecuencia</div><div class="med-detail-val">2 veces al día</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Vence</div><div class="med-detail-val">15 Jul 2025</div></div>
+      </div>
+      <div class="progreso-wrap" aria-label="Suministro restante: 42 de 60 tabletas"><div class="progreso-lbl"><span>Tabletas disponibles</span><span>42 de 60</span></div><div class="progreso-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"><div class="progreso-fill fill-green" style="width:70%"></div></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-tonal btn-icon" style="font-size:13px;padding:8px 16px" aria-label="Ver indicaciones del medicamento Metformina">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="12" y1="11" x2="16" y2="11"/><line x1="12" y1="16" x2="16" y2="16"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/></svg> Ver indicaciones
+        </button>
+        <button class="btn-outlined btn-icon" style="font-size:13px;padding:8px 16px" onclick="showVista(4)" aria-label="Agendar cita de control para Metformina">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="15" x2="12" y2="19"/><line x1="10" y1="17" x2="14" y2="17"/></svg> Agendar control
+        </button>
+      </div>
+    </div>
+
+    <!-- Medicamento 2 — URGENTE: Por renovar (Von Restorff) -->
+    <div class="med-card por-renovar" id="card-losartan" role="article" aria-label="Medicamento urgente: Losartán 50 mg requiere renovación pronto">
+      <div class="urgencia-banner" role="alert" aria-live="polite">
+        <span aria-hidden="true">⚠️</span>
+        <span><strong>Te quedan 8 tabletas.</strong> Renueva ahora para no interrumpir tu tratamiento.</span>
+      </div>
+      <div class="med-card-head">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="med-icon warn" aria-hidden="true">⚠️</div>
+          <div>
+            <div class="med-name">Losartán 50 mg</div>
+            <div class="med-generic">Para la presión arterial alta · Dra. Ana Patricia Vargas</div>
+          </div>
+        </div>
+        <span class="badge-renovar" aria-label="Estado: Renovar pronto">⚠ Renovar pronto</span>
+      </div>
+      <div class="med-details">
+        <div class="med-detail-item"><div class="med-detail-lbl">Dosis</div><div class="med-detail-val">1 tableta</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Frecuencia</div><div class="med-detail-val">1 vez al día</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Vence</div><div class="med-detail-val">3 Jun 2025</div></div>
+      </div>
+      <div class="progreso-wrap" aria-label="Suministro restante: 8 de 30 tabletas"><div class="progreso-lbl"><span>Tabletas disponibles</span><span>8 de 30 — ¡pocas!</span></div><div class="progreso-bar" role="progressbar" aria-valuenow="27" aria-valuemin="0" aria-valuemax="100"><div class="progreso-fill fill-warn" style="width:27%"></div></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="btn-filled-green btn-icon" id="btn-renovar-losartan" style="font-size:13px;padding:10px 18px" onclick="solicitarRenovacion('losartan')" aria-label="Solicitar renovación del medicamento Losartán 50 mg">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Solicitar renovación
+        </button>
+        <button class="btn-outlined btn-icon" style="font-size:13px;padding:8px 16px" onclick="showVista(4)" aria-label="Agendar cita médica para Losartán">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><line x1="12" y1="15" x2="12" y2="19"/><line x1="10" y1="17" x2="14" y2="17"/></svg> Agendar cita
+        </button>
+        <span class="renovacion-enviada-badge" id="badge-renovado-losartan" style="display:none" role="status" aria-live="polite">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg> Solicitud enviada
+        </span>
+      </div>
+    </div>
+
+    <!-- Medicamento 3 -->
+    <div class="med-card" role="article" aria-label="Medicamento: Atorvastatina 20 mg">
+      <div class="med-card-head">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="med-icon green" aria-hidden="true">💊</div>
+          <div>
+            <div class="med-name">Atorvastatina 20 mg</div>
+            <div class="med-generic">Para controlar el colesterol · Dr. Carlos Méndez</div>
+          </div>
+        </div>
+        <span class="badge-activo" aria-label="Estado: Activo">● Activo</span>
+      </div>
+      <div class="med-details">
+        <div class="med-detail-item"><div class="med-detail-lbl">Dosis</div><div class="med-detail-val">1 tableta</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Frecuencia</div><div class="med-detail-val">En la noche</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Vence</div><div class="med-detail-val">20 Ago 2025</div></div>
+      </div>
+      <div class="progreso-wrap" aria-label="Suministro restante: 28 de 30 tabletas"><div class="progreso-lbl"><span>Tabletas disponibles</span><span>28 de 30</span></div><div class="progreso-bar" role="progressbar" aria-valuenow="93" aria-valuemin="0" aria-valuemax="100"><div class="progreso-fill fill-green" style="width:93%"></div></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-tonal btn-icon" style="font-size:13px;padding:8px 16px" aria-label="Ver indicaciones del medicamento Atorvastatina">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><line x1="12" y1="11" x2="16" y2="11"/><line x1="12" y1="16" x2="16" y2="16"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/></svg> Ver indicaciones
+        </button>
+      </div>
+    </div>
+
+    <div class="banner-ctx" style="margin-top:8px"><span style="font-size:18px;flex-shrink:0">🎙</span><span>Si tienes dudas sobre tus medicamentos, puedes consultar gratis al <strong>0800-123-456</strong> o agendar una cita de seguimiento.</span></div>
+  </div>
+
+  <!-- CTA Sticky medicamento urgente (KLM: reduce P al scroll) -->
+  <div class="med-cta-sticky" id="med-cta-sticky-losartan" role="complementary" aria-label="Recordatorio de renovación urgente">
+    <div class="med-cta-sticky-text">
+      <svg style="display:inline;vertical-align:middle;margin-right:4px" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      Losartán — ¡Solo 8 tabletas!
+    </div>
+    <button class="btn-filled-green btn-icon" style="font-size:13px;padding:8px 18px;white-space:nowrap" onclick="solicitarRenovacion('losartan');document.getElementById('med-cta-sticky-losartan').style.display='none'" aria-label="Solicitar renovación de Losartán desde el acceso rápido">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg> Renovar
+    </button>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Portal Salud Más · Cuidando tu bienestar</p><small>Tel: 01 8000 123 455</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 9 — HISTORIAL ═══════════════════════ -->
+<div class="vista" id="v9">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+  </header>
+  <div class="dash-hero">
+    <div class="dash-hero-eyebrow">📋 Registro clínico</div>
+    <h1>Tu <em>historial médico</em></h1>
+    <p>Consultas, diagnósticos y seguimientos de tu historial de salud.</p>
+  </div>
+  <div class="dash-page-wrap" style="padding-top:24px">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(3)" aria-label="Volver al panel principal">← Volver al panel</button><button class="btn-tonal" onclick="showVista(10)" aria-label="Ir a tus autorizaciones">Autorizaciones →</button></div>
+
+    <div class="stat-grid" style="margin-bottom:24px">
+      <div class="stat-card"><span class="stat-num">12</span><div class="stat-label">Consultas totales</div></div>
+      <div class="stat-card"><span class="stat-num">4</span><div class="stat-label">Especialistas</div></div>
+      <div class="stat-card"><span class="stat-num">3</span><div class="stat-label">Diagnósticos activos</div></div>
+      <div class="stat-card"><span class="stat-num">2025</span><div class="stat-label">Desde el año</div></div>
+    </div>
+
+    <div class="hist-filter-row" role="group" aria-label="Filtrar historial por tipo de consulta">
+      <button class="filter-chip active" onclick="filtrarHist(this,'todos')" aria-label="Mostrar todos los registros" aria-pressed="true">Todos</button>
+      <button class="filter-chip" onclick="filtrarHist(this,'medicina-general')" aria-label="Filtrar por Medicina General" aria-pressed="false">Medicina General</button>
+      <button class="filter-chip" onclick="filtrarHist(this,'especialista')" aria-label="Filtrar por Especialistas" aria-pressed="false">Especialistas</button>
+      <button class="filter-chip" onclick="filtrarHist(this,'urgencias')" aria-label="Filtrar por Urgencias" aria-pressed="false">Urgencias</button>
+    </div>
+
+    <!-- Buscador de historial (KLM: reduce scroll S) -->
+    <div class="hist-search-wrap" role="search" aria-label="Buscar en historial">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input class="hist-search-input" type="search" id="hist-buscador" placeholder="Buscar por diagnóstico o médico..." aria-label="Buscar en tu historial médico" oninput="buscarHistorial(this.value)">
+    </div>
+
+    <!-- Consulta 1 -->
+    <div class="hist-item" data-tipo="especialista" onclick="toggleHist(this)">
+      <div class="hist-item-head">
+        <div>
+          <div class="hist-fecha">12 ABR 2025</div>
+          <div class="hist-especialidad">Neurología</div>
+          <div class="hist-medico">Dr. Roberto Silva Casares · Edificio Especialidades</div>
+        </div>
+        <span class="badge-activo">● Seguimiento activo</span>
+      </div>
+      <div class="hist-diagnostico"><strong>Diagnóstico principal</strong>Cefalea tensional crónica. Se recomienda control mensual y manejo con analgésicos de rescate.</div>
+      <div class="hist-expand-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+          <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px"><div style="font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;margin-bottom:4px">Motivo de consulta</div><div style="font-size:13px;color:var(--md-on-surface)">Dolor de cabeza recurrente, dificultad para concentrarse.</div></div>
+          <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px"><div style="font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;margin-bottom:4px">Tratamiento ordenado</div><div style="font-size:13px;color:var(--md-on-surface)">Ibuprofeno 400 mg (máx. 3/semana) + seguimiento en 30 días.</div></div>
+        </div>
+        <div class="hist-tags"><span class="chip chip-blue">📄 Ver receta</span><span class="chip chip-green">🔬 Ver exámenes</span><span class="chip" onclick="showVista(4)">📅 Nueva cita</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--md-on-surface-var);margin-top:10px;font-weight:500">Toca para ver detalles ▼</div>
+    </div>
+
+    <!-- Consulta 2 -->
+    <div class="hist-item" data-tipo="medicina-general" onclick="toggleHist(this)">
+      <div class="hist-item-head">
+        <div>
+          <div class="hist-fecha">18 MAR 2025</div>
+          <div class="hist-especialidad">Medicina General</div>
+          <div class="hist-medico">Dr. Carlos Méndez Rojas · Consultorio 203</div>
+        </div>
+        <span class="badge-pendiente">Revisión pendiente</span>
+      </div>
+      <div class="hist-diagnostico"><strong>Diagnóstico principal</strong>Control de hipertensión arterial leve. Ajuste de dosis de Losartán a 50 mg/día.</div>
+      <div class="hist-expand-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+          <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px"><div style="font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;margin-bottom:4px">Motivo de consulta</div><div style="font-size:13px;color:var(--md-on-surface)">Control trimestral, presión sistólica elevada en casa.</div></div>
+          <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px"><div style="font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;margin-bottom:4px">Tratamiento ordenado</div><div style="font-size:13px;color:var(--md-on-surface)">Ajuste de Losartán. Dieta baja en sodio. Control en 3 meses.</div></div>
+        </div>
+        <div class="hist-tags"><span class="chip chip-blue">📄 Ver receta</span><span class="chip" onclick="showVista(4)">📅 Nueva cita</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--md-on-surface-var);margin-top:10px;font-weight:500">Toca para ver detalles ▼</div>
+    </div>
+
+    <!-- Consulta 3 -->
+    <div class="hist-item" data-tipo="urgencias" onclick="toggleHist(this)">
+      <div class="hist-item-head">
+        <div>
+          <div class="hist-fecha">5 ENE 2025</div>
+          <div class="hist-especialidad">Urgencias</div>
+          <div class="hist-medico">Dra. Ana Patricia Vargas · Servicio de Urgencias</div>
+        </div>
+        <span class="chip" style="font-size:11px;padding:3px 10px">Cerrado</span>
+      </div>
+      <div class="hist-diagnostico"><strong>Diagnóstico principal</strong>Gastroenteritis aguda. Hidratación oral y reposo. Alta en 6 horas.</div>
+      <div class="hist-expand-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px">
+          <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px"><div style="font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;margin-bottom:4px">Motivo de consulta</div><div style="font-size:13px;color:var(--md-on-surface)">Náuseas, vómito, diarrea. 24 h de evolución.</div></div>
+          <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px"><div style="font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;margin-bottom:4px">Tratamiento</div><div style="font-size:13px;color:var(--md-on-surface)">Suero oral, dieta blanda. Metoclopramida según necesidad.</div></div>
+        </div>
+        <div class="hist-tags"><span class="chip chip-green">📋 Ver resumen de urgencias</span></div>
+      </div>
+      <div style="font-size:12px;color:var(--md-on-surface-var);margin-top:10px;font-weight:500">Toca para ver detalles ▼</div>
+    </div>
+
+    <div id="hist-no-results" style="display:none;text-align:center;padding:32px 0;color:var(--md-on-surface-var)"><div style="font-size:32px;margin-bottom:8px">🔍</div><p>No hay consultas en esta categoría.</p></div>
+
+    <div class="banner-ctx" style="margin-top:8px"><span style="font-size:18px;flex-shrink:0">🔒</span><span>Tu historial clínico es confidencial y está protegido bajo la Ley 1581 de 2012 de protección de datos.</span></div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Portal Salud Más · Cuidando tu bienestar</p><small>Tel: 01 8000 123 455</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 10 — AUTORIZACIONES ═══════════════════════ -->
+<div class="vista" id="v10">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+  </header>
+  <div class="dash-hero">
+    <div class="dash-hero-eyebrow">📄 Gestión de servicios</div>
+    <h1>Tus <em>autorizaciones</em></h1>
+    <p>Estado de tus solicitudes, procedimientos autorizados y servicios aprobados.</p>
+  </div>
+  <div class="dash-page-wrap" style="padding-top:24px">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(3)" aria-label="Volver al panel principal">← Volver al panel</button><button class="btn-tonal" onclick="showVista(11)" aria-label="Ir a tus resultados">Tus resultados →</button></div>
+
+    <div class="auth-summary">
+      <div class="auth-card"><span class="auth-num green">2</span><div class="auth-lbl">Aprobadas</div></div>
+      <div class="auth-card"><span class="auth-num warn">1</span><div class="auth-lbl">En revisión</div></div>
+      <div class="auth-card"><span class="auth-num blue">3</span><div class="auth-lbl">Total solicitudes</div></div>
+    </div>
+
+    <div class="section-title" style="margin-bottom:6px">Solicitudes recientes</div>
+    <p class="section-sub" style="margin-bottom:16px">Tus últimas autorizaciones y su estado actual</p>
+
+    <!-- Auth 1 — VENCIDA: Von Restorff + alerta prominente -->
+    <div class="auth-item vencida-alerta" role="article" aria-label="Autorización vencida: Resonancia Magnética Cerebral — requiere atención">
+      <div class="urgencia-banner" role="alert" aria-live="assertive">
+        <span aria-hidden="true">🚨</span>
+        <span><strong>Autorización vencida el 10 Jul 2025.</strong> Esta autorización ya no es válida. Contacta a tu médico para renovarla.</span>
+      </div>
+      <div class="auth-item-head">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="auth-icon-wrap green" aria-hidden="true">🔬</div>
+          <div>
+            <div class="auth-title">Resonancia Magnética Cerebral</div>
+            <div class="auth-sub">Solicitada por Dr. Roberto Silva · 10 Abr 2025</div>
+          </div>
+        </div>
+        <span class="badge-vencida" aria-label="Estado: Vencida">⚠ Vencida</span>
+      </div>
+      <div class="auth-meta">
+        <div class="med-detail-item"><div class="med-detail-lbl">N° Autorización</div><div class="med-detail-val">AUT-2025-0412</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Venció el</div><div class="med-detail-val" style="color:var(--urgent-border);font-weight:700">10 Jul 2025 ⚠</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Centro</div><div class="med-detail-val">Clínica Norte</div></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button class="btn-filled" style="font-size:13px;padding:8px 16px" onclick="abrirModalAutorizacion()" aria-label="Solicitar nueva autorización para Resonancia Magnética">
+          <i data-lucide="refresh-cw" style="width:14px;height:14px;stroke:#fff;vertical-align:middle;margin-right:4px"></i> Solicitar nueva autorización
+        </button>
+        <button class="btn-outlined" style="font-size:13px;padding:8px 16px" onclick="showVista(7)" aria-label="Ver centro clínica Norte">
+          <i data-lucide="map-pin" style="width:14px;height:14px;stroke:var(--md-primary);vertical-align:middle;margin-right:4px"></i> Ver centro
+        </button>
+      </div>
+    </div>
+
+    <!-- Auth 2 -->
+    <div class="auth-item vencida-alerta" role="article" aria-label="Autorización en revisión vencida: Cirugía Ambulatoria Rodilla">
+      <div class="urgencia-banner" role="alert" aria-live="polite">
+        <span aria-hidden="true">⏰</span>
+        <span><strong>Fecha estimada de respuesta: 30 Abr 2025 (vencida).</strong> Comunícate para conocer el estado actual de esta solicitud.</span>
+      </div>
+      <div class="auth-item-head">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="auth-icon-wrap warn" aria-hidden="true">⏳</div>
+          <div>
+            <div class="auth-title">Cirugía Ambulatoria — Rodilla</div>
+            <div class="auth-sub">Solicitada por Dra. Ana Patricia Vargas · 2 Abr 2025</div>
+          </div>
+        </div>
+        <span class="badge-revision" aria-label="Estado: En revisión">⏳ En revisión</span>
+      </div>
+      <div class="auth-meta">
+        <div class="med-detail-item"><div class="med-detail-lbl">N° Solicitud</div><div class="med-detail-val">SOL-2025-0402</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Fecha est. vencida</div><div class="med-detail-val" style="color:var(--urgent-border);font-weight:700">30 Abr 2025 ⚠</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Prioridad</div><div class="med-detail-val">Media</div></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-tonal" style="font-size:13px;padding:8px 16px" aria-label="Consultar estado actual de la autorización de cirugía">📞 Consultar estado</button></div>
+    </div>
+
+    <!-- Auth 3 -->
+    <div class="auth-item" role="article" aria-label="Autorización: Terapia Física Espalda lumbar">
+      <div class="auth-item-head">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <div class="auth-icon-wrap blue" aria-hidden="true">💉</div>
+          <div>
+            <div class="auth-title">Terapia Física — Espalda lumbar</div>
+            <div class="auth-sub">Solicitada por Dr. Carlos Méndez · 15 Feb 2025</div>
+          </div>
+        </div>
+        <span class="badge-aprobado" aria-label="Estado: Aprobada">✓ Aprobada</span>
+      </div>
+      <div class="auth-meta">
+        <div class="med-detail-item"><div class="med-detail-lbl">N° Autorización</div><div class="med-detail-val">AUT-2025-0220</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Sesiones usadas</div><div class="med-detail-val">12 de 20</div></div>
+        <div class="med-detail-item"><div class="med-detail-lbl">Válida hasta</div><div class="med-detail-val">15 Jun 2025</div></div>
+      </div>
+      <div class="progreso-wrap" aria-label="Sesiones utilizadas: 12 de 20"><div class="progreso-lbl"><span>Sesiones utilizadas</span><span>12 / 20</span></div><div class="progreso-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"><div class="progreso-fill fill-blue" style="width:60%"></div></div></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-tonal" style="font-size:13px;padding:8px 16px" aria-label="Descargar autorización de terapia física">📄 Descargar autorización</button></div>
+    </div>
+
+    <div class="banner-ctx" style="margin-top:8px"><span style="font-size:18px;flex-shrink:0">💡</span><span>¿Necesitas solicitar una nueva autorización? Comunícate con tu médico tratante o llama al <strong>0800-123-456</strong>.</span></div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 11 — RESULTADOS ═══════════════════════ -->
+<div class="vista" id="v11">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+  </header>
+  <div class="dash-hero">
+    <div class="dash-hero-eyebrow">🔬 Laboratorio e imágenes</div>
+    <h1>Tus <em>resultados</em></h1>
+    <p>Consulta tus exámenes de laboratorio, imágenes diagnósticas y reportes médicos.</p>
+  </div>
+  <div class="dash-page-wrap" style="padding-top:24px">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(3)" aria-label="Volver al panel principal">← Volver al panel</button><button class="btn-tonal" onclick="showVista(12)" aria-label="Ir a Ayuda">Ayuda →</button></div>
+
+    <div class="res-tabs" role="tablist" aria-label="Tipo de resultado médico">
+      <button class="res-tab active" onclick="showResTab('lab',this)" role="tab" aria-selected="true" aria-controls="respanel-lab" id="tab-lab">
+        <svg style="display:inline;vertical-align:middle;margin-right:4px" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 2v7.31l-3.72 6.97a2 2 0 0 0 1.79 2.72h7.86a2 2 0 0 0 1.79-2.72L14 9.31V2"/><line x1="8.5" y1="2" x2="15.5" y2="2"/></svg> Laboratorio
+      </button>
+      <button class="res-tab" onclick="showResTab('imagenes',this)" role="tab" aria-selected="false" aria-controls="respanel-imagenes" id="tab-imagenes">
+        <svg style="display:inline;vertical-align:middle;margin-right:4px" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="23 7 23 1 17 1"/><line x1="16" y1="8" x2="23" y2="1"/><polyline points="1 17 1 23 7 23"/><line x1="8" y1="16" x2="1" y2="23"/><polyline points="23 17 23 23 17 23"/><line x1="16" y1="16" x2="23" y2="23"/><polyline points="1 7 1 1 7 1"/><line x1="8" y1="8" x2="1" y2="1"/></svg> Imágenes
+      </button>
+      <button class="res-tab" onclick="showResTab('reportes',this)" role="tab" aria-selected="false" aria-controls="respanel-reportes" id="tab-reportes">
+        <svg style="display:inline;vertical-align:middle;margin-right:4px" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg> Reportes
+      </button>
+    </div>
+
+    <!-- Panel: Laboratorio -->
+    <div class="res-panel active" id="respanel-lab">
+      <div class="section-title" style="margin-bottom:4px">Exámenes de laboratorio</div>
+      <p class="section-sub" style="margin-bottom:16px">Últimos 6 meses · Resultados en línea</p>
+
+      <div class="res-card">
+        <div class="res-card-head">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div class="res-icon-wrap">🧪</div>
+            <div><div class="res-title">Hemograma completo</div><div class="res-date">📅 8 Abr 2025 · Dr. Carlos Méndez</div></div>
+          </div>
+          <span class="badge-activo">Disponible</span>
+        </div>
+        <table class="res-table" aria-label="Resultados del Hemograma completo">
+          <thead><tr><th scope="col">Parámetro</th><th scope="col">Tu valor</th><th scope="col">Rango normal</th><th scope="col">Estado</th></tr></thead>
+          <tbody>
+            <tr><td>Hemoglobina <span style="font-size:11px;color:var(--md-on-surface-var)">(oxígeno en sangre)</span></td><td class="res-val-normal">14.2 g/dL</td><td>13.5 – 17.5</td><td><span class="badge-normal">✓ Normal</span></td></tr>
+            <tr><td>Leucocitos <span style="font-size:11px;color:var(--md-on-surface-var)">(defensas del cuerpo)</span></td><td class="res-val-alto">11,800 /μL</td><td>4,500 – 11,000</td><td><span class="badge-alto">↑ Levemente alto</span></td></tr>
+            <tr><td>Plaquetas <span style="font-size:11px;color:var(--md-on-surface-var)">(coagulación)</span></td><td class="res-val-normal">245,000 /μL</td><td>150,000 – 400,000</td><td><span class="badge-normal">✓ Normal</span></td></tr>
+            <tr><td>Hematocrito <span style="font-size:11px;color:var(--md-on-surface-var)">(concentración de glóbulos)</span></td><td class="res-val-normal">42.5 %</td><td>41 – 53</td><td><span class="badge-normal">✓ Normal</span></td></tr>
+          </tbody>
+        </table>
+        <div style="background:#FFF3CC;border-radius:var(--shape-md);padding:10px 14px;font-size:13px;color:#5C3A00;margin-bottom:12px;border-left:3px solid var(--warn-border)" role="note" aria-label="Explicación del resultado elevado">💡 <strong>¿Qué significa leucocitos altos?</strong> Tus defensas están un poco por encima de lo normal. Esto puede deberse a una infección leve o estrés físico. Tu médico lo revisará en la próxima consulta — no es motivo de alarma.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-tonal" style="font-size:13px;padding:8px 16px">📥 Descargar PDF</button><button class="btn-outlined" style="font-size:13px;padding:8px 16px" onclick="showVista(4)">📅 Consultar médico</button></div>
+      </div>
+
+      <div class="res-card">
+        <div class="res-card-head">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div class="res-icon-wrap green">🩸</div>
+            <div><div class="res-title">Perfil lipídico</div><div class="res-date">📅 18 Mar 2025 · Dra. Ana Patricia Vargas</div></div>
+          </div>
+          <span class="badge-activo">Disponible</span>
+        </div>
+        <table class="res-table" aria-label="Resultados del Perfil lipídico">
+          <thead><tr><th scope="col">Parámetro</th><th scope="col">Tu valor</th><th scope="col">Rango deseable</th><th scope="col">Estado</th></tr></thead>
+          <tbody>
+            <tr><td>Colesterol total <span style="font-size:11px;color:var(--md-on-surface-var)">(grasa en sangre)</span></td><td class="res-val-bajo">215 mg/dL</td><td>&lt; 200</td><td><span class="badge-bajo">↑ Leve</span></td></tr>
+            <tr><td>LDL <span style="font-size:11px;color:var(--md-on-surface-var)">(colesterol "malo")</span></td><td class="res-val-normal">118 mg/dL</td><td>&lt; 130</td><td><span class="badge-normal">✓ Normal</span></td></tr>
+            <tr><td>HDL <span style="font-size:11px;color:var(--md-on-surface-var)">(colesterol "bueno")</span></td><td class="res-val-normal">52 mg/dL</td><td>&gt; 40</td><td><span class="badge-normal">✓ Normal</span></td></tr>
+            <tr><td>Triglicéridos <span style="font-size:11px;color:var(--md-on-surface-var)">(otra grasa en sangre)</span></td><td class="res-val-normal">148 mg/dL</td><td>&lt; 150</td><td><span class="badge-normal">✓ Normal</span></td></tr>
+          </tbody>
+        </table>
+        <div style="background:var(--md-primary-container);border-radius:var(--shape-md);padding:10px 14px;font-size:13px;color:var(--md-on-primary-cont);margin-bottom:12px" role="note">💡 Tu colesterol total está levemente por encima. Tu medicamento Atorvastatina ayuda a controlar esto. Continúa tu tratamiento y sigue las indicaciones de dieta de tu médico.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-tonal" style="font-size:13px;padding:8px 16px">📥 Descargar PDF</button></div>
+      </div>
+    </div>
+
+    <!-- Panel: Imágenes -->
+    <div class="res-panel" id="respanel-imagenes">
+      <div class="section-title" style="margin-bottom:4px">Imágenes diagnósticas</div>
+      <p class="section-sub" style="margin-bottom:16px">Radiografías, ecografías y resonancias</p>
+      <div class="res-card">
+        <div class="res-card-head">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div class="res-icon-wrap">🧠</div>
+            <div><div class="res-title">Resonancia Magnética — Cerebro</div><div class="res-date">📅 Pendiente de realización · Autorizada 10 Abr 2025</div></div>
+          </div>
+          <span class="badge-revision">⏳ Pendiente</span>
+        </div>
+        <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:14px;font-size:14px;color:var(--md-on-surface-var);margin-bottom:12px">La resonancia aún no ha sido realizada. Tienes autorización vigente hasta el 10 Jul 2025. Coordina con Clínica Norte para programar la fecha.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-tonal" style="font-size:13px;padding:8px 16px" onclick="showVista(7)">📍 Ver centros disponibles</button></div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-head">
+          <div style="display:flex;align-items:flex-start;gap:12px">
+            <div class="res-icon-wrap green">🦴</div>
+            <div><div class="res-title">Radiografía columna lumbar</div><div class="res-date">📅 15 Ene 2025 · Dr. Carlos Méndez</div></div>
+          </div>
+          <span class="badge-activo">Disponible</span>
+        </div>
+        <div style="background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:14px;font-size:14px;color:var(--md-on-surface);margin-bottom:12px">Resultado: <strong>Disminución leve del espacio intervertebral L4-L5.</strong> Se inicia terapia física. No requiere intervención quirúrgica en este momento.</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-tonal" style="font-size:13px;padding:8px 16px">📥 Descargar imágenes</button><button class="btn-outlined" style="font-size:13px;padding:8px 16px">📋 Ver reporte radiológico</button></div>
+      </div>
+    </div>
+
+    <!-- Panel: Reportes -->
+    <div class="res-panel" id="respanel-reportes">
+      <div class="section-title" style="margin-bottom:4px">Reportes médicos</div>
+      <p class="section-sub" style="margin-bottom:16px">Resúmenes de consulta y certificados</p>
+      <div class="res-card">
+        <div class="res-card-head">
+          <div style="display:flex;align-items:flex-start;gap:12px"><div class="res-icon-wrap">📋</div><div><div class="res-title">Resumen de consulta — Neurología</div><div class="res-date">📅 12 Abr 2025</div></div></div>
+          <span class="badge-activo">Disponible</span>
+        </div>
+        <div style="display:flex;gap:8px"><button class="btn-tonal" style="font-size:13px;padding:8px 16px">📥 Descargar PDF</button></div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-head">
+          <div style="display:flex;align-items:flex-start;gap:12px"><div class="res-icon-wrap green">🏥</div><div><div class="res-title">Certificado de atención — Urgencias</div><div class="res-date">📅 5 Ene 2025</div></div></div>
+          <span class="badge-activo">Disponible</span>
+        </div>
+        <div style="display:flex;gap:8px"><button class="btn-tonal" style="font-size:13px;padding:8px 16px">📥 Descargar PDF</button></div>
+      </div>
+    </div>
+
+    <div class="banner-ctx" style="margin-top:12px"><span style="font-size:18px;flex-shrink:0">🎙</span><span>¿Tienes dudas sobre un resultado? Agenda una cita de control o llama gratis al <strong>0800-123-456</strong>.</span></div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Portal Salud Más · Cuidando tu bienestar</p><small>Tel: 01 8000 123 455</small></div></footer>
+</div>
+</div>
+
+<!-- ═══════════════════════ VISTA 12 — AYUDA ═══════════════════════ -->
+<div class="vista" id="v12">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+  </header>
+  <div class="dash-hero">
+    <div class="dash-hero-eyebrow">🙋 Soporte personalizado</div>
+    <h1>¿En qué te <em>ayudamos</em>, Germán?</h1>
+    <p>Encuentra respuestas rápidas o contacta a nuestro equipo de soporte.</p>
+  </div>
+  <div class="dash-page-wrap" style="padding-top:24px">
+    <div class="nav-row"><button class="btn-nav" onclick="showVista(3)" aria-label="Volver al panel principal">← Volver al panel</button></div>
+
+    <!-- Accesos directos de ayuda -->
+    <div class="section-title" style="margin-bottom:6px">Accesos rápidos</div>
+    <p class="section-sub" style="margin-bottom:16px">Selecciona el tipo de ayuda que necesitas</p>
+    <div class="help-grid">
+      <div class="help-card" onclick="showVista(4)">
+        <div class="help-card-icon">📅</div>
+        <h3>Agendar una cita</h3>
+        <p>¿Tienes problemas para agendar? Te guiamos paso a paso para reservar tu cita médica.</p>
+      </div>
+      <div class="help-card" onclick="showVista(8)">
+        <div class="help-card-icon green">💊</div>
+        <h3>Renovar medicamentos</h3>
+        <p>Solicita la renovación de tus tratamientos activos directamente desde el portal.</p>
+      </div>
+      <div class="help-card" onclick="showVista(11)">
+        <div class="help-card-icon">🔬</div>
+        <h3>Ver mis resultados</h3>
+        <p>Accede a tus exámenes de laboratorio e imágenes diagnósticas en línea.</p>
+      </div>
+      <div class="help-card" onclick="showVista(10)">
+        <div class="help-card-icon green">📄</div>
+        <h3>Revisar autorizaciones</h3>
+        <p>Consulta el estado de tus autorizaciones médicas y procedimientos aprobados.</p>
+      </div>
+    </div>
+
+    <!-- Contacto -->
+    <div class="contact-strip">
+      <h3>📞 Contáctanos directamente</h3>
+      <div class="contact-row">
+        <a class="contact-btn" href="tel:0800123456" aria-label="Llamar gratis al 0800-123-456">
+          <svg style="display:inline;vertical-align:middle;margin-right:6px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.49 12 19.79 19.79 0 0 1 1.47 3.3 2 2 0 0 1 3.46 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.34a16 16 0 0 0 6 6l.83-.83a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg> Llamar gratis: 0800-123-456
+        </a>
+        <a class="contact-btn green" href="https://wa.me/573001234567?text=Hola,%20necesito%20ayuda%20con%20el%20portal%20Salud%2B" target="_blank" rel="noopener noreferrer" aria-label="Abrir chat de WhatsApp de soporte en nueva pestaña">
+          <svg style="display:inline;vertical-align:middle;margin-right:6px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> WhatsApp de soporte
+        </a>
+        <a class="contact-btn" href="mailto:soporte@salud.gov.co?subject=Ayuda%20Portal%20Salud%2B" aria-label="Enviar correo electrónico al equipo de soporte">
+          <svg style="display:inline;vertical-align:middle;margin-right:6px" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> Enviar correo
+        </a>
+      </div>
+      <p style="font-size:13px;color:var(--md-on-primary-cont);opacity:.75;margin-top:12px">Horario de atención: Lunes a Viernes, 8:00 AM – 6:00 PM · La línea gratuita funciona los 7 días de la semana.</p>
+    </div>
+
+    <!-- FAQ -->
+    <div class="section-title" style="margin-bottom:6px">Preguntas frecuentes</div>
+    <p class="section-sub" style="margin-bottom:16px">Las dudas más comunes de nuestros usuarios</p>
+
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Cómo cancelo o reprogramo una cita? <span>▼</span></div><div class="accordion-plain-body">Puedes cancelar o reprogramar tu cita desde la sección "Tu cita" del panel principal. Si la cita es en menos de 4 horas, llama directamente al centro médico o a nuestra línea gratuita 0800-123-456.</div></div>
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Por qué no aparecen mis resultados? <span>▼</span></div><div class="accordion-plain-body">Los resultados se publican en el portal entre 24 y 72 horas después de realizados los exámenes. Si ya pasó ese tiempo y no aparecen, comunícate con el laboratorio o con nuestra línea de soporte.</div></div>
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Cómo actualizo mis datos de contacto? <span>▼</span></div><div class="accordion-plain-body">Por seguridad, la actualización de datos personales debe hacerse presencialmente en cualquiera de nuestros centros de salud afiliados, presentando tu documento de identidad original.</div></div>
+    <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Puedo descargar mis documentos médicos? <span>▼</span></div><div class="accordion-plain-body">Sí. En las secciones de Resultados, Autorizaciones e Historial encontrarás botones para descargar documentos en formato PDF. Si necesitas un documento oficial con firma y sello, debes solicitarlo en el centro médico.</div></div>
+    <div class="accordion-plain" style="margin-bottom:0"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿El portal funciona en mi celular? <span>▼</span></div><div class="accordion-plain-body">Sí, el portal está optimizado para dispositivos móviles. Funciona en cualquier navegador moderno (Chrome, Safari, Firefox) sin necesidad de instalar ninguna app.</div></div>
+
+    <div style="margin-top:24px;text-align:center">
+      <button class="btn-filled" onclick="showVista(3)" aria-label="Volver al panel principal" style="margin-right:10px">← Volver al panel</button>
+    </div>
+  </div>
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Portal Salud Más · Cuidando tu bienestar</p><small>Tel: 01 8000 123 455</small></div></footer>
+</div>
+</div>
+
+<!-- FLOATS -->
+<div class="floats floats-left"><button class="fab fab-surface" aria-label="Activar asistente de voz para navegación accesible" title="Activar asistente de voz"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button><div class="fab-label" aria-hidden="true">VOZ</div></div>
+<div class="floats floats-right"><button class="fab fab-wa" onclick="window.open('https://wa.me/573001234567?text=Hola,%20necesito%20ayuda%20con%20el%20portal%20Salud%2B','_blank')" aria-label="Abrir WhatsApp de ayuda en nueva pestaña" title="Ayuda por WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button><div class="fab-label" aria-hidden="true">WhatsApp</div></div>
+
+<!-- MODAL REGISTRO -->
+<div class="modal-overlay" id="modal-registro" role="dialog" aria-modal="true" aria-labelledby="modal-titulo" aria-describedby="modal-desc">
+  <div class="modal-dialog">
+    <button class="modal-close-btn" onclick="cerrarModal()" aria-label="Cerrar formulario de registro">✕</button>
+    <h2 id="modal-titulo">Crea tu cuenta</h2>
+    <p class="sub" id="modal-desc">Completa tus datos para acceder a tu portal de salud.</p>
+    <div class="modal-toast" id="reg-toast"><span style="font-size:24px;flex-shrink:0">✓</span><div><strong style="display:block;margin-bottom:4px">¡Tu cuenta fue creada exitosamente!</strong><span style="font-size:13px;opacity:.85">En un momento te llevaremos a iniciar sesión.</span></div></div>
+    <div class="form-grid">
+      <div class="field-wrap"><label class="field-label" for="reg-nombre">Nombre completo</label><input class="md-input" type="text" id="reg-nombre" placeholder="Ej: Germán López" aria-label="Tu nombre completo" aria-required="true" autocomplete="name"></div>
+      <div class="field-wrap"><label class="field-label" for="reg-doc">Número de documento</label><input class="md-input" type="text" id="reg-doc" placeholder="Ej: 10203040" aria-label="Número de documento de identidad" aria-required="true"><span class="field-supporting">Solo números, sin puntos ni espacios.</span></div>
+    </div>
+    <div class="form-grid">
+      <div class="field-wrap"><label class="field-label" for="reg-email">Correo electrónico</label><input class="md-input" type="email" id="reg-email" placeholder="Ej: german@correo.com" aria-label="Tu correo electrónico" aria-required="true" autocomplete="email"></div>
+      <div class="field-wrap"><label class="field-label" for="reg-tel">Teléfono / WhatsApp</label><input class="md-input" type="tel" id="reg-tel" placeholder="Ej: 300 123 4567" aria-label="Tu número de teléfono o WhatsApp" aria-required="true" autocomplete="tel"></div>
+    </div>
+    <div class="form-grid">
+      <div class="field-wrap"><label class="field-label" for="reg-fecha">Fecha de nacimiento</label><input class="md-input" type="date" id="reg-fecha" aria-label="Tu fecha de nacimiento" aria-required="true"></div>
+      <div class="field-wrap"><label class="field-label" for="reg-pwd">Contraseña</label><input class="md-input" type="password" id="reg-pwd" placeholder="Mínimo 8 caracteres" aria-label="Crea tu contraseña de acceso, mínimo 8 caracteres" aria-required="true" autocomplete="new-password"><span class="field-supporting">Mínimo 8 caracteres.</span></div>
+    </div>
+    <div class="modal-divider"></div>
+    <button class="btn-filled" id="modal-submit-btn" style="width:100%;padding:16px;font-size:16px;border-radius:12px;justify-content:center" onclick="registrar()" aria-label="Crear mi cuenta en el portal Salud+">Crear mi cuenta</button>
+    <p style="font-size:14px;color:var(--md-on-surface-var);text-align:center;margin-top:14px">¿Ya tienes cuenta? <a onclick="cerrarModal();showVista(2)" style="color:var(--md-primary);font-weight:600;cursor:pointer;text-decoration:none" role="button" aria-label="Ir a iniciar sesión">Inicia sesión aquí</a></p>
+  </div>
+</div>
+
+<script>
+// ── VISTA NAVIGATION ──
+function showVista(n){
+  for(var i=1;i<=12;i++){var el=document.getElementById('v'+i);if(el)el.classList.remove('active');}
+  document.getElementById('v'+n).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  var h1=document.querySelector('#v'+n+' h1');
+  if(h1){h1.setAttribute('tabindex','-1');h1.focus();}
+  // Mostrar CTA sticky medicamento si es V8
+  if(n===8){setTimeout(function(){
+    var sticky=document.getElementById('med-cta-sticky-losartan');
+    if(sticky&&!renovacionesEnviadas['losartan'])sticky.classList.add('visible');
+  },600);}
+}
+// ── LOGIN ──
+function chkCaps(e){document.getElementById('v2caps').classList.toggle('show',e.getModifierState&&e.getModifierState('CapsLock'));}
+function doLogin(){var doc=document.getElementById('v2doc').value.trim(),pwd=document.getElementById('v2pwd').value.trim();document.getElementById('v2-error').classList.remove('show');document.getElementById('v2-toast').classList.remove('show');if(!doc||!pwd){document.getElementById('v2-error').classList.add('show');return;}if(doc==='000'){document.getElementById('v2-error').classList.add('show');return;}document.getElementById('v2-toast').classList.add('show');setTimeout(function(){showVista(3);},2200);}
+
+// ── CITA ──
+function toggleTut(){var b=document.getElementById('tutbody'),a=document.getElementById('tutarrow');b.classList.toggle('open');a.textContent=b.classList.contains('open')?'▲':'▼';}
+function toggleEsp(){var l=document.getElementById('esplist'),a=document.getElementById('esparrow');l.classList.toggle('open');a.textContent=l.classList.contains('open')?'▲':'▼';}
+function selEsp(el,name){
+  document.querySelectorAll('#esplist .select-item').forEach(function(i){i.classList.remove('sel');});
+  el.classList.add('sel');
+  document.querySelector('[onclick="toggleEsp()"]').innerHTML='<span>🏥 '+name+'</span><span id="esparrow">▲</span>';
+  document.getElementById('esplist').classList.remove('open');
+  document.getElementById('horarios').classList.add('open');
+  v4Step(2);
+  // Actualizar resumen sticky
+  var s=document.getElementById('cita-sticky');
+  var st=document.getElementById('sticky-esp-text');
+  if(st)st.textContent=name;
+  if(s)s.classList.add('visible');
+}
+// GOMS: selección rápida de especialidad (reduce M)
+function selEspRapido(name){
+  document.querySelectorAll('#esplist .select-item').forEach(function(i){i.classList.remove('sel');var t=i.textContent.trim();if(t===name)i.classList.add('sel');});
+  document.querySelector('[onclick="toggleEsp()"]').innerHTML='<span>🏥 '+name+'</span><span id="esparrow">▼</span>';
+  document.getElementById('esplist').classList.remove('open');
+  document.getElementById('horarios').classList.add('open');
+  v4Step(2);
+  var s=document.getElementById('cita-sticky');
+  var st=document.getElementById('sticky-esp-text');
+  if(st)st.textContent=name;
+  if(s)s.classList.add('visible');
+}
+function toggleHor(){var l=document.getElementById('horlist'),a=document.getElementById('horarrow');l.classList.toggle('open');a.textContent=l.classList.contains('open')?'▲':'▼';}
+function selHorarioDD(el,name,id){
+  document.querySelectorAll('#horlist .select-item').forEach(function(i){i.classList.remove('sel');});
+  el.classList.add('sel');
+  document.getElementById('hor-btn').innerHTML='<span>📅 '+name+'</span><span id="horarrow">▲</span>';
+  document.getElementById('horlist').classList.remove('open');
+  document.getElementById('confirmsec').classList.add('open');
+  v4Step(3);
+  // Actualizar resumen sticky con horario
+  var sh=document.getElementById('sticky-hora-text');
+  if(sh)sh.textContent=name.split('·')[0].trim();
+}
+function confirmarCita(){var t=document.getElementById('v4-toast-verde');t.classList.add('show');v4Step(3);t.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('cita-sticky').classList.remove('visible');}
+function v4Step(n){['v4s1','v4s2','v4s3'].forEach(function(s,i){var el=document.getElementById(s);el.classList.remove('active','done','upcoming');if(i+1<n)el.classList.add('done');else if(i+1===n)el.classList.add('active');else el.classList.add('upcoming');});}
+function cambiarEsp(){document.getElementById('horarios').classList.remove('open');document.getElementById('confirmsec').classList.remove('open');document.getElementById('v4-toast-verde').classList.remove('show');document.getElementById('cita-sticky').classList.remove('visible');v4Step(1);}
+function abrirMapa(){window.open('https://maps.google.com/?q=Hospital+Bogota+Colombia','_blank');}
+
+// ── MODAL con TRAP FOCUS ──
+function abrirModal(){
+  var modal=document.getElementById('modal-registro');
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  setTimeout(function(){var f=modal.querySelector('button,input,select,textarea,[tabindex]:not([tabindex="-1"])');if(f)f.focus();},50);
+}
+function cerrarModal(){
+  document.getElementById('modal-registro').classList.remove('open');
+  document.body.style.overflow='';
+  var btn=document.querySelector('[onclick="abrirModal()"]');
+  if(btn)btn.focus();
+}
+document.addEventListener('keydown',function(e){
+  var modal=document.getElementById('modal-registro');
+  if(!modal||!modal.classList.contains('open'))return;
+  if(e.key==='Escape'){cerrarModal();return;}
+  if(e.key!=='Tab')return;
+  var focusables=modal.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled]),textarea:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])');
+  var arr=Array.prototype.slice.call(focusables);
+  var first=arr[0],last=arr[arr.length-1];
+  if(e.shiftKey){if(document.activeElement===first){e.preventDefault();last.focus();}}
+  else{if(document.activeElement===last){e.preventDefault();first.focus();}}
+});
+function registrar(){var nombre=document.getElementById('reg-nombre').value.trim(),doc=document.getElementById('reg-doc').value.trim(),email=document.getElementById('reg-email').value.trim(),tel=document.getElementById('reg-tel').value.trim(),fecha=document.getElementById('reg-fecha').value.trim(),pwd=document.getElementById('reg-pwd').value.trim();if(!nombre||!doc||!email||!tel||!fecha||!pwd){alert('Por favor completa todos los campos.');return;}document.getElementById('reg-toast').classList.add('show');setTimeout(function(){cerrarModal();showVista(2);},2500);}
+document.addEventListener('DOMContentLoaded',function(){
+  var overlay=document.getElementById('modal-registro');
+  if(overlay)overlay.addEventListener('click',function(e){if(e.target===this)cerrarModal();});
+  // Inicializar iconos Lucide
+});
+
+// ── BÚSQUEDA PREDICTIVA MEDICAMENTOS (KLM reduce M+P+K) ──
+var medsData=[
+  {id:'med1',nombre:'Metformina 500 mg',desc:'Para el azúcar en la sangre',icon:'💊'},
+  {id:'med2',nombre:'Losartán 50 mg',desc:'Para la presión arterial',icon:'⚠️'},
+  {id:'med3',nombre:'Atorvastatina 20 mg',desc:'Para controlar el colesterol',icon:'💊'}
+];
+function buscarMed(q){
+  var list=document.getElementById('med-sugerencias');
+  if(!q||q.length<1){list.classList.remove('open');return;}
+  var results=medsData.filter(function(m){return m.nombre.toLowerCase().indexOf(q.toLowerCase())>-1||m.desc.toLowerCase().indexOf(q.toLowerCase())>-1;});
+  if(!results.length){list.classList.remove('open');return;}
+  list.innerHTML=results.map(function(m){
+    var hl=m.nombre.replace(new RegExp('('+q+')','gi'),'<mark>$1</mark>');
+    return '<div class="med-suggestion-item" role="option" tabindex="0" onclick="irAMedicamento(\''+m.id+'\')" onkeydown="if(event.key===\'Enter\')irAMedicamento(\''+m.id+'\')">'+m.icon+' <div><div style="font-weight:600">'+hl+'</div><div style="font-size:12px;color:var(--md-on-surface-var)">'+m.desc+'</div></div></div>';
+  }).join('');
+  list.classList.add('open');
+}
+function cerrarSugerencias(){document.getElementById('med-sugerencias').classList.remove('open');}
+function irAMedicamento(id){
+  cerrarSugerencias();
+  document.getElementById('med-buscador').value='';
+  var card=document.getElementById('card-'+id.replace('med',''))||document.querySelector('[aria-label*="'+{med1:'Metformina',med2:'Losartán',med3:'Atorvastatina'}[id]+'"]');
+  if(card){card.scrollIntoView({behavior:'smooth',block:'center'});card.style.outline='3px solid var(--md-primary)';setTimeout(function(){card.style.outline='';},2000);}
+}
+
+// ── BÚSQUEDA EN HISTORIAL (KLM reduce S) ──
+function buscarHistorial(q){
+  var items=document.querySelectorAll('.hist-item');
+  var visible=0;
+  items.forEach(function(i){
+    var txt=i.textContent.toLowerCase();
+    if(!q||txt.indexOf(q.toLowerCase())>-1){i.style.display='';visible++;}
+    else{i.style.display='none';}
+  });
+  document.getElementById('hist-no-results').style.display=visible===0?'block':'none';
+}
+
+// ── FAQ ACCORDIONS ──
+function toggleFaq(hdr){var body=hdr.nextElementSibling,arrow=hdr.querySelector('span');var isOpen=body.classList.toggle('open');arrow.textContent=isOpen?'▲':'▼';hdr.setAttribute('aria-expanded',isOpen);}
+
+// ── SERVICIOS TABS ──
+function showTab(id){
+  document.querySelectorAll('.serv-tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});
+  document.querySelectorAll('.serv-panel').forEach(function(p){p.classList.remove('active');});
+  event.target.classList.add('active');
+  event.target.setAttribute('aria-selected','true');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+// ── HISTORIAL ──
+function toggleHist(el){var body=el.querySelector('.hist-expand-body');var isOpen=body.classList.toggle('open');el.querySelector(':scope > div:last-child').textContent=isOpen?'Toca para cerrar ▲':'Toca para ver detalles ▼';el.setAttribute('aria-expanded',isOpen);}
+function filtrarHist(el,tipo){
+  document.querySelectorAll('.hist-filter-row .filter-chip').forEach(function(c){c.classList.remove('active');c.setAttribute('aria-pressed','false');});
+  el.classList.add('active');
+  el.setAttribute('aria-pressed','true');
+  document.getElementById('hist-buscador').value='';
+  var items=document.querySelectorAll('.hist-item');var visible=0;
+  items.forEach(function(i){if(tipo==='todos'||i.dataset.tipo===tipo){i.style.display='';visible++;}else{i.style.display='none';}});
+  document.getElementById('hist-no-results').style.display=visible===0?'block':'none';
+}
+// ── RESULTADOS TABS ──
+function showResTab(id,btn){
+  document.querySelectorAll('.res-tab').forEach(function(t){t.classList.remove('active');t.setAttribute('aria-selected','false');});
+  document.querySelectorAll('.res-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  btn.setAttribute('aria-selected','true');
+  document.getElementById('respanel-'+id).classList.add('active');
+}
+// ── CENTROS FILTER & SEARCH ──
+var activeFilter='todos';
+function setFilter(el,tipo){
+  document.querySelectorAll('.filter-chip').forEach(function(c){c.classList.remove('active');c.setAttribute('aria-pressed','false');});
+  el.classList.add('active');
+  el.setAttribute('aria-pressed','true');
+  activeFilter=tipo;
+  filtrarCentros();
+}
+function filtrarCentros(){
+  var q=document.getElementById('buscarCentro').value.toLowerCase();
+  var cards=document.querySelectorAll('.centro-card');
+  var visible=0;
+  cards.forEach(function(c){
+    var matchTipo=activeFilter==='todos'||c.dataset.tipo===activeFilter;
+    var matchBusq=c.dataset.nombre.toLowerCase().indexOf(q)>-1||q==='';
+    if(matchTipo&&matchBusq){c.style.display='';visible++;}else{c.style.display='none';}
+  });
+  document.getElementById('no-resultados').style.display=visible===0?'block':'none';
+}
+
+// ── ESTADO RENOVACIÓN PERSISTENTE ──
+var renovacionesEnviadas={};
+function solicitarRenovacion(medId){
+  if(renovacionesEnviadas[medId])return;
+  renovacionesEnviadas[medId]=true;
+  var toast=document.getElementById('v8-toast-renovar');
+  toast.style.display='flex';
+  window.scrollTo({top:0,behavior:'smooth'});
+  var btn=document.getElementById('btn-renovar-'+medId);
+  if(btn){
+    btn.innerHTML='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg> Solicitud enviada';
+    btn.classList.add('btn-renovado');
+    btn.disabled=true;
+    btn.setAttribute('aria-label','Solicitud de renovación ya enviada');
+    btn.setAttribute('aria-disabled','true');
+  }
+  var badge=document.getElementById('badge-renovado-'+medId);
+  if(badge)badge.style.display='inline-flex';
+  var card=document.getElementById('card-'+medId);
+  if(card){
+    card.classList.remove('por-renovar');
+    var urgBanner=card.querySelector('.urgencia-banner');
+    if(urgBanner){urgBanner.style.background='var(--md-tertiary-cont)';urgBanner.style.borderColor='var(--md-tertiary)';urgBanner.style.color='var(--md-on-tertiary-cont)';urgBanner.innerHTML='<svg style="flex-shrink:0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 10"/></svg><span><strong>Solicitud enviada correctamente.</strong> Te avisaremos en 24 horas cuando esté lista.</span>';}
+  }
+  var sticky=document.getElementById('med-cta-sticky-losartan');
+  if(sticky)sticky.classList.remove('visible');
+}
+
+// ── MENÚ USUARIO (dropdown) ──
+function toggleUserMenu(){
+  var dd=document.getElementById('user-dropdown');
+  var trigger=document.getElementById('user-menu-trigger');
+  var isOpen=dd.style.display==='block';
+  dd.style.display=isOpen?'none':'block';
+  trigger.setAttribute('aria-expanded',String(!isOpen));
+  if(!isOpen){
+    document.addEventListener('click',function closeMenu(e){
+      if(!trigger.contains(e.target)){dd.style.display='none';trigger.setAttribute('aria-expanded','false');document.removeEventListener('click',closeMenu);}
+    });
+  }
+}
+
+// ── MODAL NUEVA AUTORIZACIÓN ──
+function abrirModalAutorizacion(){
+  var overlay=document.getElementById('modal-autorizacion');
+  if(overlay){overlay.classList.add('open');return;}
+  var html='<div id="modal-autorizacion" class="modal-overlay open" onclick="if(event.target===this)cerrarModalAuth()">'
+    +'<div class="modal-dialog" style="max-width:480px">'
+    +'<button class="modal-close-btn" onclick="cerrarModalAuth()" aria-label="Cerrar">✕</button>'
+    +'<h2>Solicitar nueva autorización</h2>'
+    +'<p class="sub">Tu médico tratante debe gestionar la renovación. Elige cómo continuar:</p>'
+    +'<div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">'
+    +'<a href="tel:0800123456" class="btn-filled" style="justify-content:center;text-decoration:none"><i data-lucide="phone" style="width:16px;height:16px;stroke:#fff;margin-right:6px"></i> Llamar gratis: 0800-123-456</a>'
+    +'<button class="btn-outlined" onclick="showVista(4);cerrarModalAuth()" style="justify-content:center"><i data-lucide="calendar-days" style="width:16px;height:16px;stroke:var(--md-primary);margin-right:6px"></i> Agendar cita con mi médico</button>'
+    +'</div>'
+    +'<p style="font-size:12px;color:var(--md-on-surface-var);margin-top:16px;text-align:center">También puedes escribirnos por WhatsApp desde el botón verde en la esquina de la pantalla.</p>'
+    +'</div></div>';
+  document.body.insertAdjacentHTML('beforeend',html);
+  if(window.lucide)window.lucide.createIcons();
+}
+function cerrarModalAuth(){
+  var overlay=document.getElementById('modal-autorizacion');
+  if(overlay)overlay.classList.remove('open');
+}
+
+// Inicializar Lucide al cargar
+window.addEventListener('load',function(){
+  if(window.lucide)window.lucide.createIcons();
+});
+</script>
+</body>
+</html>
