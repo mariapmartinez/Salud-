@@ -542,6 +542,217 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 .contact-row{display:flex;gap:10px;flex-wrap:wrap}
 .contact-btn{display:inline-flex;align-items:center;gap:8px;background:var(--md-primary);color:#fff;border:none;padding:12px 20px;font-size:14px;font-weight:600;border-radius:var(--shape-full);cursor:pointer;font-family:var(--font);transition:all .2s;text-decoration:none}
 .contact-btn:hover{background:#0D4A72}.contact-btn.green{background:var(--md-tertiary)}.contact-btn.green:hover{background:#008660}
+
+/* ══════════════════════════════════════════════════════════
+   REFINAMIENTO AUDITORÍA — RESPONSIVE MOBILE-FIRST
+   Breakpoints: móvil ≤480px | tablet ≤768px | desktop 960px+
+   ══════════════════════════════════════════════════════════ */
+
+/* ── STEPPER PROGRESO "Paso X de 4" ── */
+.stepper-progress{text-align:center;font-size:13px;font-weight:700;color:var(--md-primary);margin-bottom:10px;letter-spacing:.3px}
+.stepper-progress span{background:var(--md-primary-container);color:var(--md-on-primary-cont);padding:4px 14px;border-radius:var(--shape-full);font-size:12px}
+
+/* ── VISTA CONFIRMACIÓN CITA (v4-confirm) ── */
+.confirm-page-wrap{padding:0 28px 48px}
+.confirm-hero{background:var(--md-tertiary);color:#fff;padding:40px 36px;text-align:center;position:relative;overflow:hidden}
+.confirm-hero::before{content:'';position:absolute;top:-60px;right:-60px;width:220px;height:220px;border-radius:50%;background:rgba(255,255,255,.06)}
+.confirm-check{width:72px;height:72px;background:rgba(255,255,255,.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;animation:confirmPop .5s ease}
+@keyframes confirmPop{0%{transform:scale(0);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+.confirm-hero h1{font-size:28px;font-weight:700;margin-bottom:8px;line-height:1.2}
+.confirm-hero p{font-size:16px;opacity:.85;line-height:1.5}
+.confirm-ref{background:rgba(255,255,255,.15);border-radius:var(--shape-md);padding:10px 20px;display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;margin-top:16px;letter-spacing:.5px}
+.confirm-card{background:var(--md-surface-cont);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:24px;box-shadow:var(--elev-2);margin-bottom:20px}
+.confirm-card h3{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:16px;display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--md-outline-var);padding-bottom:12px}
+.confirm-detail{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.confirm-item{background:var(--md-surface-cont-low);border-radius:var(--shape-md);padding:12px 14px}
+.confirm-item-lbl{font-size:11px;font-weight:700;color:var(--md-on-surface-var);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.confirm-item-val{font-size:14px;font-weight:600;color:var(--md-on-surface)}
+.confirm-notify{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.confirm-notify .chip{font-size:13px}
+.confirm-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.confirm-actions .btn-filled{flex:1;justify-content:center}
+.confirm-actions .btn-outlined{flex:1;justify-content:center}
+
+/* ── SNACKBAR LOGOUT ── */
+.logout-snack{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--md-on-surface);color:#fff;border-radius:var(--shape-full);padding:12px 24px;font-size:14px;font-weight:600;z-index:1000;opacity:0;transition:all .35s ease;white-space:nowrap;box-shadow:var(--elev-3);display:flex;align-items:center;gap:10px;pointer-events:none}
+.logout-snack.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── MODAL REGISTRO HONESTO (Harris) ── */
+.registro-honesto{background:var(--md-surface-cont-low);border:1px solid var(--md-outline-var);border-radius:var(--shape-md);padding:14px 18px;font-size:13px;color:var(--md-on-surface-var);margin-bottom:16px;line-height:1.6}
+.registro-honesto strong{color:var(--md-on-surface);display:block;margin-bottom:4px}
+
+/* ── ACERCA DE — SECCIÓN PRIVACIDAD / OPERADOR (Harris) ── */
+.privacy-section{background:var(--md-surface-cont-low);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:24px 28px;margin-bottom:24px}
+.privacy-section h3{font-size:17px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.privacy-section p{font-size:14px;color:var(--md-on-surface-var);line-height:1.7;margin-bottom:12px}
+.privacy-section p:last-child{margin-bottom:0}
+.privacy-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px}
+.privacy-item{background:var(--md-surface-cont);border-radius:var(--shape-md);padding:12px 14px;border:1px solid var(--md-outline-var)}
+.privacy-item-lbl{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--md-on-surface-var);margin-bottom:4px}
+.privacy-item-val{font-size:13px;font-weight:600;color:var(--md-on-surface)}
+
+/* ── PREFERENCIAS NOTIFICACIONES EN PERFIL ── */
+.notif-pref-section{background:var(--md-surface-cont-low);border:1px solid var(--md-outline-var);border-radius:var(--shape-lg);padding:20px 24px;margin-bottom:20px}
+.notif-pref-section h3{font-size:16px;font-weight:700;color:var(--md-on-surface);margin-bottom:4px}
+.notif-pref-section p{font-size:13px;color:var(--md-on-surface-var);margin-bottom:16px}
+.notif-option{display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid var(--md-outline-var)}
+.notif-option:last-child{border-bottom:none;padding-bottom:0}
+.notif-option-text strong{font-size:14px;font-weight:600;color:var(--md-on-surface);display:block}
+.notif-option-text span{font-size:12px;color:var(--md-on-surface-var)}
+.toggle-switch{position:relative;width:48px;height:26px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-slider{position:absolute;cursor:pointer;top:0;left:0;right:0;bottom:0;background:var(--md-outline-var);border-radius:26px;transition:.3s}
+.toggle-slider:before{position:absolute;content:"";height:20px;width:20px;left:3px;bottom:3px;background:white;border-radius:50%;transition:.3s}
+.toggle-switch input:checked+.toggle-slider{background:var(--md-tertiary)}
+.toggle-switch input:checked+.toggle-slider:before{transform:translateX(22px)}
+
+/* ── JERARQUÍA ALERTAS (max 1 crítica visible) ── */
+.alert-collapsed{background:var(--md-surface-variant);border:1px solid var(--md-outline-var);border-radius:var(--shape-md);padding:10px 16px;font-size:13px;font-weight:600;color:var(--md-on-surface-var);cursor:pointer;display:flex;align-items:center;gap:8px;margin-top:8px;transition:all .2s}
+.alert-collapsed:hover{background:var(--md-primary-container);color:var(--md-on-primary-cont)}
+.alert-count-badge{background:var(--md-error);color:#fff;border-radius:var(--shape-full);width:20px;height:20px;font-size:11px;font-weight:700;display:inline-flex;align-items:center;justify-content:center}
+
+/* ── EMPTY STATE URGENCIAS MEJORADO ── */
+.empty-urgencias{background:var(--md-error-cont);border:1.5px solid var(--urgent-border);border-radius:var(--shape-lg);padding:24px;margin-top:16px;text-align:center}
+.empty-urgencias p{font-size:15px;font-weight:700;color:var(--urgent-text);margin-bottom:8px}
+.empty-urgencias small{font-size:13px;color:var(--urgent-text);opacity:.8}
+.empty-urgencias .btn-filled-green{margin-top:16px;width:100%;justify-content:center}
+
+/* ── FAB CONTEXTUAL (solo en vistas que lo necesitan) ── */
+.floats-right.fab-hidden{display:none!important}
+
+/* ══════════════════════════════════════════════════════════
+   RESPONSIVE MOBILE-FIRST
+   ══════════════════════════════════════════════════════════ */
+
+/* TABLET ≤768px */
+@media (max-width:768px){
+  .screen{margin:0;border-radius:0;box-shadow:none}
+  .top-nav{display:none}
+  .top-bar{padding:0 14px;height:56px}
+  .brand-name{font-size:17px}
+  .user-name{display:none}
+  .page-hero{padding:28px 20px 24px}
+  .page-hero h1{font-size:24px}
+  .page-wrap{padding:0 16px 32px}
+  .nav-row{padding:12px 16px;margin-bottom:20px}
+  .ob-grid{grid-template-columns:1fr 1fr}
+  .tools-grid{grid-template-columns:repeat(3,1fr);gap:10px}
+  .tool-card{padding:18px 10px;min-height:100px}
+  .tool-icon-wrap{width:40px;height:40px}
+  .tool-name{font-size:12px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .team-grid{grid-template-columns:1fr 1fr}
+  .serv-grid{grid-template-columns:1fr}
+  .process-steps{grid-template-columns:1fr 1fr;gap:10px}
+  .proc-step::after{display:none}
+  .info-row{grid-template-columns:1fr}
+  .help-grid{grid-template-columns:1fr 1fr}
+  .form-grid{grid-template-columns:1fr}
+  .confirm-detail{grid-template-columns:1fr}
+  .privacy-grid{grid-template-columns:1fr}
+  .med-status-bar{grid-template-columns:1fr 1fr 1fr}
+  .med-details{grid-template-columns:1fr 1fr}
+  .auth-summary{grid-template-columns:1fr 1fr 1fr}
+  .auth-meta{grid-template-columns:1fr 1fr}
+  .res-table{font-size:12px}
+  .res-table th,.res-table td{padding:7px 8px}
+  .cita-wrap{padding:0 16px 28px}
+  .dash-page-wrap{padding:0 16px 32px}
+  .login-wrap{padding:0 16px 32px}
+  .dash-wrap{padding:0 16px 28px}
+  .contact-row{flex-direction:column}
+  .contact-btn{justify-content:center}
+  .confirm-actions{flex-direction:column}
+  .confirm-actions .btn-filled,.confirm-actions .btn-outlined{width:100%}
+  .hero-section{padding:32px 20px 28px}
+  .hero-section h1{font-size:28px}
+  .hero-section>p{font-size:16px}
+  .hero-cta{gap:10px}
+  .hero-cta .btn-filled-green,.hero-cta .btn-outlined{padding:13px 20px;font-size:15px}
+  .onboarding-strip{padding:24px 20px}
+  .app-footer{padding:16px 20px;flex-direction:column;text-align:center;gap:8px}
+  .footer-info{text-align:center}
+  .user-chip{padding:4px 8px 4px 4px}
+  .centro-details{grid-template-columns:1fr 1fr}
+  .centro-actions{flex-wrap:wrap}
+  .centro-actions .btn-tonal,.centro-actions .btn-nav{font-size:13px;padding:9px 14px}
+  .modal-dialog{padding:24px 20px 20px;border-radius:var(--shape-lg) var(--shape-lg) 0 0;position:fixed;bottom:0;left:0;right:0;max-width:100%;margin:0;animation:slideUp .3s ease}
+  @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
+  .md-stepper{flex-direction:row;padding:4px}
+  .md-step{font-size:0;padding:8px}
+  .md-step.active{font-size:13px;flex:2}
+  .md-step.done .step-dot::after{content:'✓'}
+  .stepper-progress{font-size:14px;margin-bottom:8px}
+}
+
+/* MÓVIL ≤480px */
+@media (max-width:480px){
+  body{font-size:15px}
+  .screen{margin:0;border-radius:0}
+  .top-bar{height:52px;padding:0 12px}
+  .brand-name{font-size:16px}
+  .brand-icon{width:30px;height:30px}
+  .page-hero h1,.hero-section h1{font-size:22px}
+  .page-wrap,.dash-page-wrap,.cita-wrap,.login-wrap,.dash-wrap{padding:0 12px 28px}
+  .nav-row{padding:10px 12px;margin-bottom:16px}
+  .ob-grid{grid-template-columns:1fr}
+  .tools-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .tool-card{padding:14px 8px;min-height:88px}
+  .tool-icon-wrap{width:36px;height:36px}
+  .tool-name{font-size:11px}
+  .stat-grid{grid-template-columns:1fr 1fr;gap:8px}
+  .stat-num{font-size:22px}
+  .team-grid{grid-template-columns:1fr}
+  .help-grid{grid-template-columns:1fr}
+  .serv-tabs{gap:4px}
+  .serv-tab{font-size:12px;padding:7px 10px}
+  .section-title{font-size:17px}
+  .btn-filled,.btn-filled-green,.btn-outlined{padding:12px 20px;font-size:15px}
+  .btn-confirm{padding:15px;font-size:16px}
+  .md-stepper{gap:1px}
+  .md-step.active{font-size:12px}
+  .step-dot{width:22px;height:22px;font-size:11px}
+  .welcome-card{padding:14px 16px;gap:12px}
+  .welcome-card .wc-icon{width:40px;height:40px;font-size:18px}
+  .welcome-card h2{font-size:16px}
+  .voice-card{font-size:13px;padding:12px 14px}
+  .med-card{padding:16px}
+  .med-details{grid-template-columns:1fr 1fr 1fr}
+  .auth-summary{grid-template-columns:1fr 1fr}
+  .auth-meta{grid-template-columns:1fr}
+  .hist-item{padding:16px}
+  .hist-especialidad{font-size:14px}
+  .res-table{display:block;overflow-x:auto;white-space:nowrap}
+  .centro-card{padding:16px}
+  .centro-details{grid-template-columns:1fr 1fr}
+  .floats-left{left:8px;bottom:16px}
+  .floats-right{right:8px;bottom:16px}
+  .fab{width:46px;height:46px}
+  .fab-label{font-size:10px}
+  .logout-snack{font-size:13px;padding:10px 18px;width:calc(100% - 32px);text-align:center;white-space:normal;justify-content:center}
+  .hero-section{padding:24px 16px 22px}
+  .hero-section>p{font-size:15px;margin-bottom:24px}
+  .hero-cta{flex-direction:column}
+  .hero-cta .btn-filled-green,.hero-cta .btn-outlined{width:100%;justify-content:center;padding:14px}
+  .onboarding-strip{padding:20px 16px}
+  .cta-strip{padding:20px 16px}
+  .cta-strip .btn-filled,.cta-strip .btn-outlined{width:100%;justify-content:center}
+  .confirm-hero{padding:28px 20px}
+  .confirm-hero h1{font-size:22px}
+  .confirm-page-wrap{padding:0 12px 36px}
+  .confirm-detail{grid-template-columns:1fr}
+  .modal-dialog{padding:20px 16px 16px}
+  .form-grid{grid-template-columns:1fr}
+  .contact-row{flex-direction:column;gap:8px}
+  .contact-btn{width:100%;justify-content:center}
+  .quick-btns{flex-direction:column}
+  .quick-btn{width:100%;justify-content:center}
+  .map-placeholder{height:150px}
+  .process-steps{grid-template-columns:1fr}
+  .proc-step::after{display:none}
+  .app-footer{padding:14px 16px}
+}
+
 </style>
 </head>
 <body>
@@ -661,10 +872,13 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
   </div>
   <div class="cita-wrap">
     <div class="nav-row"><button class="btn-nav" onclick="showVista(3)">← Atrás</button><button class="btn-nav" onclick="cambiarEsp()">Reiniciar</button></div>
-    <div class="md-stepper">
-      <div class="md-step active" id="v4s1" onclick="v4Step(1)"><div class="step-dot">1</div> Especialidad</div>
-      <div class="md-step upcoming" id="v4s2" onclick="v4Step(2)"><div class="step-dot">2</div> Horarios</div>
-      <div class="md-step upcoming" id="v4s3" onclick="v4Step(3)"><div class="step-dot">3</div> Confirmar</div>
+    <div class="stepper-progress" id="stepper-progress" aria-live="polite" aria-label="Progreso del agendamiento">
+      <span id="stepper-progress-text">Paso 1 de 4</span>
+    </div>
+    <div class="md-stepper" role="tablist" aria-label="Pasos para agendar tu cita">
+      <div class="md-step active" id="v4s1" onclick="v4Step(1)" role="tab" aria-selected="true" tabindex="0"><div class="step-dot">1</div> Especialidad</div>
+      <div class="md-step upcoming" id="v4s2" onclick="v4Step(2)" role="tab" aria-selected="false" tabindex="-1"><div class="step-dot">2</div> Horarios</div>
+      <div class="md-step upcoming" id="v4s3" onclick="v4Step(3)" role="tab" aria-selected="false" tabindex="-1"><div class="step-dot">3</div> Confirmar</div>
     </div>
     <div class="snack-success" id="v4-toast-verde">
       <div class="snack-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
@@ -813,6 +1027,53 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
     <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Mis datos están seguros? <span>▼</span></div><div class="accordion-plain-body">Todos los datos son cifrados con AES-256 y almacenados en servidores certificados en Colombia, bajo las leyes de protección de datos (Ley 1581 de 2012).</div></div>
     <div class="accordion-plain"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Puedo usarlo sin internet? <span>▼</span></div><div class="accordion-plain-body">Ofrecemos acceso alternativo por línea gratuita (0800-123-456) y puntos de atención presencial en todos los centros de salud afiliados.</div></div>
     <div class="accordion-plain" style="margin-bottom:0"><div class="accordion-plain-hdr" onclick="toggleFaq(this)">¿Qué EPS están afiliadas? <span>▼</span></div><div class="accordion-plain-body">Actualmente tenemos convenio con las principales EPS del país: Sura, Compensar, Nueva EPS, Sanitas, Coomeva, Famisanar y más de 15 entidades regionales.</div></div>
+
+    <!-- INFORMACIÓN DEL OPERADOR Y PRIVACIDAD — Obligación legal Ley 1581/2012 y Ética Harris -->
+    <div class="section-title" style="margin-bottom:6px">Datos del operador y privacidad</div>
+    <p class="section-sub" style="margin-bottom:16px">Información legal requerida por la Ley Estatutaria 1581 de 2012 y la Resolución 839 de 2017</p>
+
+    <div class="privacy-section">
+      <h3>
+        <i data-lucide="building-2" style="width:18px;height:18px;stroke:var(--md-primary);flex-shrink:0"></i>
+        Operador del portal
+      </h3>
+      <div class="privacy-grid">
+        <div class="privacy-item"><div class="privacy-item-lbl">Razón social</div><div class="privacy-item-val">Ministerio de Salud y Protección Social — República de Colombia</div></div>
+        <div class="privacy-item"><div class="privacy-item-lbl">NIT</div><div class="privacy-item-val">899.999.034-1</div></div>
+        <div class="privacy-item"><div class="privacy-item-lbl">Domicilio</div><div class="privacy-item-val">Carrera 13 # 32-76, Bogotá D.C., Colombia</div></div>
+        <div class="privacy-item"><div class="privacy-item-lbl">Correo de datos</div><div class="privacy-item-val">datos@minsalud.gov.co</div></div>
+      </div>
+      <p>El Ministerio de Salud y Protección Social actúa como responsable del tratamiento de datos personales de los usuarios del Portal Salud+, conforme a la Política de Tratamiento de Datos Personales adoptada mediante Resolución interna.</p>
+    </div>
+
+    <div class="privacy-section">
+      <h3>
+        <i data-lucide="shield" style="width:18px;height:18px;stroke:var(--md-tertiary);flex-shrink:0"></i>
+        Política de privacidad y uso de datos de salud
+      </h3>
+      <p><strong>¿Qué datos recopilamos?</strong> Datos de identificación (nombre, documento, fecha de nacimiento), datos de contacto (correo, teléfono) y datos clínicos de salud (citas, medicamentos, resultados, diagnósticos) estrictamente necesarios para la prestación del servicio.</p>
+      <p><strong>Base legal del tratamiento.</strong> El tratamiento de sus datos se realiza bajo la base legal del consentimiento libre e informado (artículo 9 de la Ley 1581 de 2012) y del interés público en la prestación de servicios de salud (Resolución 839 de 2017).</p>
+      <p><strong>¿Con quién compartimos sus datos?</strong> Sus datos se comparten únicamente con su EPS afiliada, los centros de salud de la red y los médicos tratantes autorizados. No compartimos datos con terceros con fines comerciales ni publicitarios.</p>
+      <p><strong>Sus derechos.</strong> Usted tiene derecho a conocer, actualizar, rectificar y suprimir sus datos personales. Puede ejercer estos derechos escribiendo a <strong>datos@minsalud.gov.co</strong> o llamando al <strong>0800-123-456</strong>.</p>
+      <p><strong>Entidad de supervisión.</strong> La Superintendencia de Industria y Comercio (SIC) supervisa el cumplimiento de la normativa de protección de datos en Colombia. Puede presentar quejas en <a href="https://www.sic.gov.co" target="_blank" rel="noopener" style="color:var(--md-primary);font-weight:600">www.sic.gov.co</a>.</p>
+      <div style="background:var(--md-surface-cont);border-radius:var(--shape-md);padding:12px 16px;margin-top:8px;border-left:3px solid var(--md-tertiary)">
+        <p style="margin:0;font-size:13px;color:var(--md-on-surface-var)"><strong style="color:var(--md-on-surface);display:inline">Sin publicidad, sin manipulación.</strong> Portal Salud+ no muestra anuncios, no usa algoritmos de engagement y no comparte datos con plataformas publicitarias. El diseño de este portal está orientado a su bienestar, no a su tiempo de pantalla.</p>
+      </div>
+    </div>
+
+    <div class="privacy-section">
+      <h3>
+        <i data-lucide="message-square" style="width:18px;height:18px;stroke:var(--md-primary);flex-shrink:0"></i>
+        Canal oficial de quejas y peticiones
+      </h3>
+      <p>Para solicitudes, quejas, reclamos o sugerencias relacionadas con el Portal Salud+ o con el tratamiento de sus datos personales, contamos con los siguientes canales oficiales:</p>
+      <div class="privacy-grid">
+        <div class="privacy-item"><div class="privacy-item-lbl">Línea gratuita</div><div class="privacy-item-val"><a href="tel:0800123456" style="color:var(--md-primary);font-weight:700">0800-123-456</a></div></div>
+        <div class="privacy-item"><div class="privacy-item-lbl">Correo electrónico</div><div class="privacy-item-val"><a href="mailto:peticiones@minsalud.gov.co" style="color:var(--md-primary);font-weight:700">peticiones@minsalud.gov.co</a></div></div>
+        <div class="privacy-item"><div class="privacy-item-lbl">Tiempo de respuesta</div><div class="privacy-item-val">15 días hábiles (Ley 1437 de 2011)</div></div>
+        <div class="privacy-item"><div class="privacy-item-lbl">Horario de atención</div><div class="privacy-item-val">Lunes a Viernes, 8:00 AM – 5:00 PM</div></div>
+      </div>
+    </div>
 
     <div style="margin-top:28px;text-align:center">
       <button class="btn-filled" onclick="showVista(2)" style="margin-right:10px">Acceder al portal →</button>
@@ -1122,10 +1383,21 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 
     </div><!-- /centros-lista -->
 
-    <div id="no-resultados" style="display:none;text-align:center;padding:40px;color:var(--md-on-surface-var)">
-      <div style="font-size:40px;margin-bottom:12px">🔍</div>
-      <p style="font-size:16px;font-weight:600;color:var(--md-on-surface)">No se encontraron centros</p>
-      <p style="font-size:14px;margin-top:6px">Intenta con otro término o activa el filtro "Todos".</p>
+    <div id="no-resultados" style="display:none">
+      <div style="text-align:center;padding:32px 16px 16px;color:var(--md-on-surface-var)">
+        <i data-lucide="search-x" style="width:40px;height:40px;stroke:var(--md-outline-var)"></i>
+        <p style="font-size:16px;font-weight:600;color:var(--md-on-surface);margin-top:12px">No se encontraron centros</p>
+        <p style="font-size:14px;margin-top:6px">Intenta con otro término o activa el filtro "Todos".</p>
+      </div>
+      <div class="empty-urgencias" role="region" aria-label="Centros de urgencias siempre disponibles">
+        <i data-lucide="alert-triangle" style="width:28px;height:28px;stroke:var(--urgent-border);margin-bottom:8px"></i>
+        <p>¿Buscas atención de urgencias?</p>
+        <small>Los centros de urgencias están disponibles 24 horas, 7 días a la semana, sin importar tu búsqueda.</small>
+        <button class="btn-filled-green" onclick="setFilter(document.querySelector('.filter-chip[onclick*=urgencias]'),'urgencias')" aria-label="Ver centros de urgencias disponibles 24 horas">
+          <i data-lucide="zap" style="width:16px;height:16px;stroke:#fff"></i>
+          Ver centros de urgencias 24h →
+        </button>
+      </div>
     </div>
 
   </div>
@@ -1139,7 +1411,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 <div class="screen">
   <header class="top-bar">
     <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
-    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="doLogout('Germán')">Cerrar sesión</button></div>
   </header>
   <div class="dash-hero">
     <div class="dash-hero-eyebrow">💊 Medicamentos activos</div>
@@ -1277,7 +1549,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 <div class="screen">
   <header class="top-bar">
     <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
-    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="doLogout('Germán')">Cerrar sesión</button></div>
   </header>
   <div class="dash-hero">
     <div class="dash-hero-eyebrow">📋 Registro clínico</div>
@@ -1383,7 +1655,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 <div class="screen">
   <header class="top-bar">
     <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
-    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="doLogout('Germán')">Cerrar sesión</button></div>
   </header>
   <div class="dash-hero">
     <div class="dash-hero-eyebrow">📄 Gestión de servicios</div>
@@ -1489,7 +1761,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 <div class="screen">
   <header class="top-bar">
     <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
-    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="doLogout('Germán')">Cerrar sesión</button></div>
   </header>
   <div class="dash-hero">
     <div class="dash-hero-eyebrow">🔬 Laboratorio e imágenes</div>
@@ -1618,7 +1890,7 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 <div class="screen">
   <header class="top-bar">
     <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
-    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="showVista(1)">Cerrar sesión</button></div>
+    <div class="bar-actions"><div class="user-chip"><div class="user-avatar">GL</div><span class="user-name">Germán</span></div><button class="btn-text-inv" onclick="showVista(3)">← Panel</button><button class="btn-text-inv" onclick="doLogout('Germán')">Cerrar sesión</button></div>
   </header>
   <div class="dash-hero">
     <div class="dash-hero-eyebrow">🙋 Soporte personalizado</div>
@@ -1629,6 +1901,56 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
     <div class="nav-row"><button class="btn-nav" onclick="showVista(3)" aria-label="Volver al panel principal">← Volver al panel</button></div>
 
     <!-- Accesos directos de ayuda -->
+    <!-- PREFERENCIAS DE NOTIFICACIÓN (Ética Harris: agencia del usuario) -->
+    <div class="notif-pref-section" role="region" aria-label="Preferencias de notificaciones de medicamentos y citas">
+      <h3><i data-lucide="bell-cog" style="width:16px;height:16px;stroke:var(--md-primary);vertical-align:middle;margin-right:6px"></i>Mis preferencias de notificaciones</h3>
+      <p>Elige cómo quieres recibir recordatorios de medicamentos, citas y autorizaciones. Tú decides.</p>
+      <div class="notif-option">
+        <div class="notif-option-text">
+          <strong>Recordatorios de medicamentos</strong>
+          <span>Aviso cuando un medicamento esté por vencerse o necesite renovación</span>
+        </div>
+        <label class="toggle-switch" aria-label="Activar recordatorios de medicamentos">
+          <input type="checkbox" checked aria-checked="true" onchange="this.setAttribute('aria-checked',this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="notif-option">
+        <div class="notif-option-text">
+          <strong>Recordatorios de citas</strong>
+          <span>Aviso 24 horas antes de tu cita médica agendada</span>
+        </div>
+        <label class="toggle-switch" aria-label="Activar recordatorios de citas">
+          <input type="checkbox" checked aria-checked="true" onchange="this.setAttribute('aria-checked',this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="notif-option">
+        <div class="notif-option-text">
+          <strong>Resultados de laboratorio disponibles</strong>
+          <span>Aviso cuando tus exámenes estén listos para consultar</span>
+        </div>
+        <label class="toggle-switch" aria-label="Activar notificaciones de resultados de laboratorio">
+          <input type="checkbox" checked aria-checked="true" onchange="this.setAttribute('aria-checked',this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <div class="notif-option">
+        <div class="notif-option-text">
+          <strong>Canal preferido: WhatsApp</strong>
+          <span>Recibe las notificaciones por WhatsApp además del portal</span>
+        </div>
+        <label class="toggle-switch" aria-label="Activar notificaciones por WhatsApp">
+          <input type="checkbox" aria-checked="false" onchange="this.setAttribute('aria-checked',this.checked)">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+      <p style="font-size:12px;color:var(--md-on-surface-var);margin-top:12px">
+        <i data-lucide="shield-check" style="width:12px;height:12px;stroke:var(--md-tertiary);vertical-align:middle;margin-right:4px"></i>
+        Tus preferencias se guardan localmente. No compartimos esta configuración con terceros.
+      </p>
+    </div>
+
     <div class="section-title" style="margin-bottom:6px">Accesos rápidos</div>
     <p class="section-sub" style="margin-bottom:16px">Selecciona el tipo de ayuda que necesitas</p>
     <div class="help-grid">
@@ -1689,6 +2011,94 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 </div>
 </div>
 
+
+<!-- ═══════════════════════ VISTA 4-CONFIRM — CONFIRMACIÓN CITA ═══════════════════════ -->
+<div class="vista" id="v4confirm">
+<div class="screen">
+  <header class="top-bar">
+    <div class="brand" onclick="showVista(1)"><div class="brand-icon"><svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><span class="brand-name">SALUD<span>+</span></span></div>
+    <div class="bar-actions"><span style="color:rgba(255,255,255,.8);font-size:15px;font-weight:600">Cita confirmada</span><button class="btn-text-inv" onclick="showVista(3)" aria-label="Volver al panel">← Panel</button></div>
+  </header>
+  <div class="confirm-hero" role="region" aria-label="Confirmación exitosa de tu cita médica">
+    <div class="confirm-check" aria-hidden="true">
+      <i data-lucide="check" style="width:36px;height:36px;stroke:#fff;stroke-width:3"></i>
+    </div>
+    <h1>¡Listo, Germán!<br>Tu cita quedó agendada</h1>
+    <p>Recibirás los detalles por correo, SMS y WhatsApp en los próximos minutos.</p>
+    <div class="confirm-ref" role="note" aria-label="Número de referencia de tu cita">
+      <i data-lucide="hash" style="width:14px;height:14px;stroke:rgba(255,255,255,.8)"></i>
+      Ref: <strong id="confirm-ref-num">CIT-2026-08471</strong>
+    </div>
+  </div>
+
+  <div class="confirm-page-wrap" style="padding-top:28px">
+    <!-- Resumen de la cita -->
+    <div class="confirm-card">
+      <h3>
+        <i data-lucide="calendar-check" style="width:18px;height:18px;stroke:var(--md-tertiary)"></i>
+        Resumen de tu cita
+      </h3>
+      <div class="confirm-detail">
+        <div class="confirm-item">
+          <div class="confirm-item-lbl">Especialidad</div>
+          <div class="confirm-item-val" id="conf-especialidad">Neurocirugía</div>
+        </div>
+        <div class="confirm-item">
+          <div class="confirm-item-lbl">Médico</div>
+          <div class="confirm-item-val" id="conf-medico">Dr. Roberto Silva C.</div>
+        </div>
+        <div class="confirm-item">
+          <div class="confirm-item-lbl">Fecha y hora</div>
+          <div class="confirm-item-val" id="conf-fecha">Viernes 19 Ene · 11:00 AM</div>
+        </div>
+        <div class="confirm-item">
+          <div class="confirm-item-lbl">Sede</div>
+          <div class="confirm-item-val">Edificio Especialidades · Cons. 021</div>
+        </div>
+      </div>
+      <div style="font-size:13px;color:var(--md-on-surface-var);margin-top:4px;display:flex;align-items:center;gap:6px">
+        <i data-lucide="info" style="width:13px;height:13px;stroke:var(--md-on-surface-var);flex-shrink:0"></i>
+        Lleva tu documento de identidad. Llega 10 minutos antes.
+      </div>
+    </div>
+
+    <!-- Canales de confirmación -->
+    <div class="confirm-card">
+      <h3>
+        <i data-lucide="bell" style="width:18px;height:18px;stroke:var(--md-primary)"></i>
+        Te avisamos por
+      </h3>
+      <div class="confirm-notify">
+        <span class="chip chip-blue"><i data-lucide="mail" style="width:12px;height:12px;stroke:var(--md-on-primary-cont)"></i> Correo</span>
+        <span class="chip chip-blue"><i data-lucide="smartphone" style="width:12px;height:12px;stroke:var(--md-on-primary-cont)"></i> SMS</span>
+        <span class="chip chip-green"><i data-lucide="message-circle" style="width:12px;height:12px;stroke:var(--md-on-tertiary-cont)"></i> WhatsApp</span>
+      </div>
+    </div>
+
+    <!-- CTAs -->
+    <div class="confirm-actions">
+      <button class="btn-filled" onclick="showVista(3)" aria-label="Ir al panel principal">
+        <i data-lucide="layout-dashboard" style="width:16px;height:16px;stroke:#fff"></i>
+        Ir a mi panel
+      </button>
+      <button class="btn-outlined" onclick="resetCitaYVolver()" aria-label="Agendar otra cita">
+        <i data-lucide="calendar-plus" style="width:16px;height:16px;stroke:var(--md-primary)"></i>
+        Agendar otra cita
+      </button>
+    </div>
+
+    <div style="text-align:center;margin-top:20px">
+      <button class="btn-tonal" style="font-size:13px;padding:9px 18px" aria-label="Agregar cita al calendario" onclick="alert('Función de calendario en desarrollo.')">
+        <i data-lucide="calendar-plus-2" style="width:14px;height:14px;stroke:var(--md-on-primary-cont)"></i>
+        Agregar al calendario
+      </button>
+    </div>
+  </div>
+
+  <footer class="app-footer"><div class="footer-brand" onclick="showVista(1)">SALUD<span>+</span></div><div class="footer-info"><p>Línea Gratuita: 0800-123-456</p><small>Lunes a Viernes, 8am – 6pm</small></div></footer>
+</div>
+</div>
+
 <!-- FLOATS -->
 <div class="floats floats-left"><button class="fab fab-surface" aria-label="Activar asistente de voz para navegación accesible" title="Activar asistente de voz"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg></button><div class="fab-label" aria-hidden="true">VOZ</div></div>
 <div class="floats floats-right"><button class="fab fab-wa" onclick="window.open('https://wa.me/573001234567?text=Hola,%20necesito%20ayuda%20con%20el%20portal%20Salud%2B','_blank')" aria-label="Abrir WhatsApp de ayuda en nueva pestaña" title="Ayuda por WhatsApp"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></button><div class="fab-label" aria-hidden="true">WhatsApp</div></div>
@@ -1699,6 +2109,10 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
     <button class="modal-close-btn" onclick="cerrarModal()" aria-label="Cerrar formulario de registro">✕</button>
     <h2 id="modal-titulo">Crea tu cuenta</h2>
     <p class="sub" id="modal-desc">Completa tus datos para acceder a tu portal de salud.</p>
+    <div class="registro-honesto" role="note" aria-label="Información importante sobre el registro">
+      <strong><i data-lucide="info" style="width:14px;height:14px;stroke:var(--md-primary);vertical-align:middle;margin-right:4px"></i>¿Cómo funciona el registro?</strong>
+      El registro requiere que estés afiliado activamente a una EPS convenida. Si ya eres afiliado, completa el formulario y activaremos tu acceso en 24 horas. Si no estás afiliado aún, llama al <strong>0800-123-456</strong> — te orientamos sin costo.
+    </div>
     <div class="modal-toast" id="reg-toast"><span style="font-size:24px;flex-shrink:0">✓</span><div><strong style="display:block;margin-bottom:4px">¡Tu cuenta fue creada exitosamente!</strong><span style="font-size:13px;opacity:.85">En un momento te llevaremos a iniciar sesión.</span></div></div>
     <div class="form-grid">
       <div class="field-wrap"><label class="field-label" for="reg-nombre">Nombre completo</label><input class="md-input" type="text" id="reg-nombre" placeholder="Ej: Germán López" aria-label="Tu nombre completo" aria-required="true" autocomplete="name"></div>
@@ -1721,16 +2135,42 @@ button:focus-visible,a:focus-visible{outline:3px solid var(--md-primary);outline
 <script>
 // ── VISTA NAVIGATION ──
 function showVista(n){
+  // Ocultar todas las vistas (v1–v12 + v4confirm)
   for(var i=1;i<=12;i++){var el=document.getElementById('v'+i);if(el)el.classList.remove('active');}
-  document.getElementById('v'+n).classList.add('active');
+  var vc=document.getElementById('v4confirm');if(vc)vc.classList.remove('active');
+
+  var targetId = (n==='4confirm')?'v4confirm':'v'+n;
+  var target=document.getElementById(targetId);
+  if(target)target.classList.add('active');
   window.scrollTo({top:0,behavior:'smooth'});
-  var h1=document.querySelector('#v'+n+' h1');
+  var h1=document.querySelector('#'+targetId+' h1');
   if(h1){h1.setAttribute('tabindex','-1');h1.focus();}
+
+  // FAB WhatsApp contextual: ocultar en login (v2) y stepper de cita (v4, v4confirm)
+  var fabRight=document.querySelector('.floats-right');
+  if(fabRight){
+    var hideInViews=[2,4,'4confirm'];
+    var nStr=String(n);
+    fabRight.classList.toggle('fab-hidden', hideInViews.indexOf(nStr)>-1||hideInViews.indexOf(n)>-1);
+  }
+
   // Mostrar CTA sticky medicamento si es V8
   if(n===8){setTimeout(function(){
     var sticky=document.getElementById('med-cta-sticky-losartan');
     if(sticky&&!renovacionesEnviadas['losartan'])sticky.classList.add('visible');
   },600);}
+
+  // Reiniciar Lucide icons
+  if(window.lucide)window.lucide.createIcons();
+}
+
+// Función logout con snackbar feedback
+function doLogout(nombre){
+  var snack=document.getElementById('logout-snack');
+  var msg=document.getElementById('logout-snack-msg');
+  if(msg&&nombre)msg.textContent='Sesión cerrada. ¡Hasta pronto, '+(nombre||'Germán')+'!';
+  if(snack){snack.classList.add('show');setTimeout(function(){snack.classList.remove('show');},3000);}
+  setTimeout(function(){showVista(1);},600);
 }
 // ── LOGIN ──
 function chkCaps(e){document.getElementById('v2caps').classList.toggle('show',e.getModifierState&&e.getModifierState('CapsLock'));}
@@ -1776,8 +2216,40 @@ function selHorarioDD(el,name,id){
   var sh=document.getElementById('sticky-hora-text');
   if(sh)sh.textContent=name.split('·')[0].trim();
 }
-function confirmarCita(){var t=document.getElementById('v4-toast-verde');t.classList.add('show');v4Step(3);t.scrollIntoView({behavior:'smooth',block:'start'});document.getElementById('cita-sticky').classList.remove('visible');}
-function v4Step(n){['v4s1','v4s2','v4s3'].forEach(function(s,i){var el=document.getElementById(s);el.classList.remove('active','done','upcoming');if(i+1<n)el.classList.add('done');else if(i+1===n)el.classList.add('active');else el.classList.add('upcoming');});}
+function confirmarCita(){
+  // Actualizar datos en pantalla de confirmación
+  var esp=document.getElementById('sticky-esp-text');
+  var hora=document.getElementById('sticky-hora-text');
+  var medEl=document.getElementById('conf-medico');
+  var feEl=document.getElementById('conf-fecha');
+  var espEl=document.getElementById('conf-especialidad');
+  if(esp&&espEl)espEl.textContent=esp.textContent||'Neurocirugía';
+  if(hora&&feEl)feEl.textContent=hora.textContent||'Próximamente';
+  // Generar número de referencia único
+  var ref='CIT-2026-'+Math.floor(10000+Math.random()*90000);
+  var refEl=document.getElementById('confirm-ref-num');
+  if(refEl)refEl.textContent=ref;
+  // Ir a pantalla de confirmación
+  document.getElementById('cita-sticky').classList.remove('visible');
+  showVista('4confirm');
+}
+function v4Step(n){
+  ['v4s1','v4s2','v4s3'].forEach(function(s,i){
+    var el=document.getElementById(s);
+    el.classList.remove('active','done','upcoming');
+    el.setAttribute('aria-selected','false');
+    if(i+1<n){el.classList.add('done');}
+    else if(i+1===n){el.classList.add('active');el.setAttribute('aria-selected','true');}
+    else{el.classList.add('upcoming');}
+  });
+  // Actualizar "Paso X de 4"
+  var prog=document.getElementById('stepper-progress-text');
+  if(prog){var labels=['Elige tu especialidad','Selecciona horario','Confirma tu cita','¡Cita agendada!'];prog.textContent='Paso '+n+' de 4 — '+labels[n-1];}
+}
+function resetCitaYVolver(){
+  cambiarEsp();
+  showVista(4);
+}
 function cambiarEsp(){document.getElementById('horarios').classList.remove('open');document.getElementById('confirmsec').classList.remove('open');document.getElementById('v4-toast-verde').classList.remove('show');document.getElementById('cita-sticky').classList.remove('visible');v4Step(1);}
 function abrirMapa(){window.open('https://maps.google.com/?q=Hospital+Bogota+Colombia','_blank');}
 
@@ -1965,10 +2437,26 @@ function cerrarModalAuth(){
   if(overlay)overlay.classList.remove('open');
 }
 
-// Inicializar Lucide al cargar
+// Inicializar Lucide al cargar y re-inicializar en cambios
 window.addEventListener('load',function(){
   if(window.lucide)window.lucide.createIcons();
 });
+// MutationObserver para re-inicializar Lucide cuando se inserta HTML dinámico
+(function(){
+  var observer=new MutationObserver(function(){
+    if(window.lucide)window.lucide.createIcons();
+  });
+  document.addEventListener('DOMContentLoaded',function(){
+    observer.observe(document.body,{childList:true,subtree:true});
+  });
+})();
 </script>
+
+<!-- SNACKBAR LOGOUT -->
+<div class="logout-snack" id="logout-snack" role="status" aria-live="polite" aria-label="Confirmación de cierre de sesión">
+  <i data-lucide="log-out" style="width:16px;height:16px;stroke:#fff;flex-shrink:0"></i>
+  <span id="logout-snack-msg">Sesión cerrada. ¡Hasta pronto, Germán!</span>
+</div>
+
 </body>
 </html>
