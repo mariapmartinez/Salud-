@@ -2441,14 +2441,19 @@ function cerrarModalAuth(){
 window.addEventListener('load',function(){
   if(window.lucide)window.lucide.createIcons();
 });
-// MutationObserver para re-inicializar Lucide cuando se inserta HTML dinámico
+// Re-inicialización segura de Lucide (evita loop infinito de MutationObserver)
 (function(){
-  var observer=new MutationObserver(function(){
-    if(window.lucide)window.lucide.createIcons();
-  });
-  document.addEventListener('DOMContentLoaded',function(){
-    observer.observe(document.body,{childList:true,subtree:true});
-  });
+  var lucideInitialized = false;
+
+  function initLucide(){
+    if(window.lucide && !lucideInitialized){
+      window.lucide.createIcons();
+      lucideInitialized = true;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', initLucide);
+  window.addEventListener('load', initLucide);
 })();
 </script>
 
